@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--底部用户按钮选择器-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/main_user" android:state_checked="false"></item>
+    <item android:drawable="@drawable/main_user_press" android:state_checked="true"></item>
+</selector>

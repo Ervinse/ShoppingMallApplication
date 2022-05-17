@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--底部菜单文字颜色选择器-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="#535353" android:state_checked="false"></item>
+    <item android:color="#ff4040" android:state_checked="true"></item>
+</selector>
