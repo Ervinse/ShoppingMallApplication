@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -53,60 +52,5 @@
 
             android:text="个人中心" />
     </RadioGroup>
-    <!--    <RelativeLayout-->
-    <!--        android:id="@+id/rl"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="65dp"-->
-    <!--        android:layout_alignParentBottom="true"-->
-
-    <!--        android:layout_marginBottom="4dp"-->
-    <!--        android:layout_weight="1"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.0"-->
-    <!--        app:layout_constraintStart_toStartOf="parent">-->
-
-    <!--        <LinearLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:gravity="center">-->
-
-
-    <!--            <ImageView-->
-    <!--                android:id="@+id/main_button1"-->
-    <!--                android:layout_weight="1"-->
-    <!--                android:layout_width="0dp"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                app:srcCompat="@drawable/mine"-->
-    <!--                />-->
-
-    <!--            <ImageView-->
-    <!--                android:id="@+id/main_button2"-->
-    <!--                android:layout_weight="1"-->
-    <!--                android:layout_width="0dp"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                app:srcCompat="@drawable/mine"-->
-    <!--                />-->
-
-    <!--            <ImageView-->
-    <!--                android:id="@+id/main_button3"-->
-    <!--                android:layout_weight="1"-->
-    <!--                android:layout_width="0dp"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                app:srcCompat="@drawable/mine"-->
-    <!--                />-->
-
-    <!--            <ImageView-->
-    <!--                android:id="@+id/main_button4"-->
-    <!--                android:layout_weight="1"-->
-    <!--                android:layout_width="0dp"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                app:srcCompat="@drawable/mine"-->
-    <!--                />-->
-
-    <!--        </LinearLayout>-->
-
-
-    <!--    </RelativeLayout>-->
 
 </LinearLayout>

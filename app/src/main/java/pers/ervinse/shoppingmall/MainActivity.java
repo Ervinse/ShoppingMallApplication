@@ -1,14 +1,10 @@
 package pers.ervinse.shoppingmall;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import java.util.ArrayList;
@@ -19,7 +15,7 @@ import pers.ervinse.shoppingmall.shoppingcart.fragment.ShoppingCartFragment;
 import pers.ervinse.shoppingmall.type.fragment.TypeFragment;
 import pers.ervinse.shoppingmall.user.fragment.UserFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();;
     //碎片索引号
@@ -58,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         BaseFragment homeFragment = fragmentList.get(0);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.frameLayout, homeFragment).commit();
+        tempFragemnt = homeFragment;
 
     }
 
