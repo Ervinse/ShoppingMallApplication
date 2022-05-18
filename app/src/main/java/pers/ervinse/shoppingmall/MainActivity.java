@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -20,6 +21,7 @@ import pers.ervinse.shoppingmall.user.fragment.UserFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();;
     //碎片索引号
     private int fragmentIndex;
 
@@ -37,16 +39,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //加载底部按钮组
         bottom_btn_group = findViewById(R.id.bottom_btn_group);
         //设置底部按钮中的'首页'在打开应用时被选中
         bottom_btn_group.check(R.id.home_bottom_btn);
 
+
+
         //初始化碎片
         initFragment();
+
         //初始化监听器
         initListener();
 
+
+        //获取首页fragment,加载布局和数据
+        BaseFragment homeFragment = fragmentList.get(0);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.frameLayout, homeFragment).commit();
 
     }
 
@@ -99,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         //设置底部按钮中的'首页'在打开应用时被选中
         bottom_btn_group.check(R.id.home_bottom_btn);
+
     }
 
     /**
@@ -124,7 +136,8 @@ public class MainActivity extends AppCompatActivity {
         if (tempFragemnt != nextFragment) {
             tempFragemnt = nextFragment;
             if (nextFragment != null) {
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction(); //判断nextFragment是否添加
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                //判断nextFragment是否添加
                 if (!nextFragment.isAdded()) {
                     //隐藏当前Fragment
                     if (fromFragment != null) {
