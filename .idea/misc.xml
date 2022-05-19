@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GitHub/ShoppingMallApplication/app/src/main/res/drawable/bottom_button_text_selector.xml" value="0.1695" />
+        <entry key="..\:/GitHub/ShoppingMallApplication/app/src/main/res/drawable/cart_button_selector.xml" value="0.1695" />
+        <entry key="..\:/GitHub/ShoppingMallApplication/app/src/main/res/drawable/community_button_selector.xml" value="0.1695" />
+        <entry key="..\:/GitHub/ShoppingMallApplication/app/src/main/res/layout/activity_main.xml" value="0.33489583333333334" />
         <entry key="app/src/main/res/drawable/bottom_button_text_selector.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/cart_button_selector.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/community_button_selector.xml" value="0.2085" />
