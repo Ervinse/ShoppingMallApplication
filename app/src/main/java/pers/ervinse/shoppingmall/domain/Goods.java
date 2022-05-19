@@ -1,13 +1,14 @@
 package pers.ervinse.shoppingmall.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * 商品实体类
  */
-public class Goods {
+public class Goods implements Serializable {
 
-    private String name, describe;
+    private String name, describe,location;
     private int number;
     private double price;
     //TODO 商品图片
@@ -15,15 +16,10 @@ public class Goods {
     public Goods() {
     }
 
-    public Goods(String name, String describe, double price) {
+    public Goods(String name, String describe, String location, int number, double price) {
         this.name = name;
         this.describe = describe;
-        this.price = price;
-    }
-
-    public Goods(String name, String describe, int number, double price) {
-        this.name = name;
-        this.describe = describe;
+        this.location = location;
         this.number = number;
         this.price = price;
     }
@@ -44,6 +40,14 @@ public class Goods {
         this.describe = describe;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     public int getNumber() {
         return number;
     }
@@ -58,28 +62,5 @@ public class Goods {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    @Override
-    public String toString() {
-        return "goods{" +
-                "name='" + name + '\'' +
-                ", describe='" + describe + '\'' +
-                ", number=" + number +
-                ", price=" + price +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Goods goods = (Goods) o;
-        return Double.compare(goods.price, price) == 0 && name.equals(goods.name) && Objects.equals(describe, goods.describe);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, describe, price);
     }
 }

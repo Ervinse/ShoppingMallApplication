@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/add_cart_bg_selector.xml" value="0.14" />
         <entry key="app/src/main/res/drawable/bottom_button_text_selector.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/cart_button_selector.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/community_button_selector.xml" value="0.2085" />
@@ -12,6 +13,7 @@
         <entry key="app/src/main/res/drawable/search_home_shape.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/type_button_selector.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/user_button_selector.xml" value="0.2085" />
+        <entry key="app/src/main/res/layout/activity_goods_info.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/home_recycler_item.xml" value="0.1" />

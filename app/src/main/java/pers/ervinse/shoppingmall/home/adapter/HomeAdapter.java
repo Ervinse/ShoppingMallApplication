@@ -1,16 +1,20 @@
 package pers.ervinse.shoppingmall.home.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import pers.ervinse.shoppingmall.GoodsInfoActivity;
 import pers.ervinse.shoppingmall.R;
 import pers.ervinse.shoppingmall.domain.Goods;
 
@@ -80,6 +84,28 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             item_description_tv = itemView.findViewById(R.id.item_description);
             item_price_tv = itemView.findViewById(R.id.item_price);
             item_image = itemView.findViewById(R.id.item_image);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(context, getLayoutPosition() + "", Toast.LENGTH_SHORT).show();
+
+                    //TODO 模拟数据
+                    //加载数据
+                    goodsList = new ArrayList<Goods>();
+                    for (int i = 1;i < 20;i++){
+                        Goods goods = new Goods();
+                        goods.setName("商品" + String.valueOf(i));
+                        goods.setDescribe("这是商品" + String.valueOf(i) + "的描述");
+                        goods.setPrice(999.99);
+                        goodsList.add(goods);
+                    }
+                    Goods goodsByClick = goodsList.get(getLayoutPosition());
+                    Intent intent = new Intent(context, GoodsInfoActivity.class);
+                    intent.putExtra("goods", goodsByClick);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

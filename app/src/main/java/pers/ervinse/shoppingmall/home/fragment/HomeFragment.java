@@ -49,6 +49,7 @@ public class HomeFragment extends BaseFragment {
         super.initData();
         Log.e(TAG, "主页数据初始化");
 
+        //TODO 模拟数据
         //加载数据
         goodsList = new ArrayList<Goods>();
         for (int i = 1;i < 20;i++){

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".GoodsInfoActivity">
+
+
+    <!--标题栏-->
+    <LinearLayout
+        android:id="@+id/goods_info_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageButton
+            android:id="@+id/good_info_back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/top_bar_left_back" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="商品详情"
+            android:textColor="#564c4c"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/ib_good_info_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_more" />
+
+    </LinearLayout>
+    <!--分割-->
+    <View
+        android:id="@+id/cutting_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#eeee" />
+
+
+    <ImageView
+        android:id="@+id/goods_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/item_example" />
+
+    <!--商品名称和价格-->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/goods_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="商品名称"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="120dp">
+
+            <TextView
+                android:id="@+id/dollar_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="价格: ￥"
+                android:textSize="22dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/goods_price_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/dollar_tv"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="10dp"
+                android:text="100"
+                android:textSize="22dp"
+                android:textStyle="bold"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <!--商品描述-->
+    <TextView
+        android:id="@+id/goods_description_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:maxLines="5"
+        android:text="这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/location"
+            />
+
+        <TextView
+            android:id="@+id/goods_location_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="8dp"
+            android:maxLines="2"
+            android:text="这里是地址,这里是地址,这里是地址,这里是地址,这里是地址,这里是地址"/>
+    </LinearLayout>
+
+    <!--空白填充页面-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!--底部按钮组-->
+    <LinearLayout
+        android:id="@+id/ll_goods_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#fff">
+
+        <TextView
+            android:id="@+id/goods_customer_service_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/icon_callserver_unpressed"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="联系客服"
+            android:textColor="#393b3e" />
+
+        <TextView
+            android:id="@+id/goods_like_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/good_uncollected"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="收藏"
+            android:textColor="#393b3e" />
+
+
+        <TextView
+            android:id="@+id/good_cart_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/icon_good_detail_cart"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="购物车"
+            android:textColor="#393b3e" />
+
+        <Button
+            android:id="@+id/btn_good_info_addcart"
+            android:layout_width="120dp"
+            android:layout_height="51dp"
+            android:layout_gravity="center"
+            android:background="@drawable/add_cart_bg_selector"
+            android:gravity="center"
+            android:text="加入购物车"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+
+
+</LinearLayout>
