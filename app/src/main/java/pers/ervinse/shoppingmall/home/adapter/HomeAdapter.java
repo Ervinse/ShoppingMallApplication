@@ -1,4 +1,4 @@
-package pers.ervinse.shoppingmall.community.adapter;
+package pers.ervinse.shoppingmall.home.adapter;
 
 import android.content.Context;
 import android.view.View;

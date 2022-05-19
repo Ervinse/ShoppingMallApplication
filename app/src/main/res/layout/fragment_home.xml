@@ -8,11 +8,57 @@
         android:id="@+id/titlebar"
         layout="@layout/titlebar" />
 
+    <RadioGroup
+        android:id="@+id/category_btn_group"
+        android:layout_width="420dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titlebar"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:background="#fec901"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/category_cold_btn"
+            style="@style/HomeCategoryButtonStyle"
+            android:drawableTop="@drawable/category_cold"
+            android:text="首页" />
+
+        <RadioButton
+            android:id="@+id/type_bottom_btn"
+            style="@style/HomeCategoryButtonStyle"
+            android:drawableTop="@drawable/category_cold"
+            android:text="分类" />
+
+        <RadioButton
+            android:id="@+id/community_bottom_btn"
+            style="@style/HomeCategoryButtonStyle"
+            android:drawableTop="@drawable/category_cold"
+            android:paddingTop="10dp"
+            android:text="发现" />
+
+        <RadioButton
+            android:id="@+id/cart_bottom_btn"
+            style="@style/HomeCategoryButtonStyle"
+            android:drawableTop="@drawable/category_cold"
+            android:text="购物车" />
+
+        <RadioButton
+            android:id="@+id/user_bottom_btn"
+            style="@style/HomeCategoryButtonStyle"
+            android:drawableTop="@drawable/category_cold"
+
+            android:text="个人中心" />
+    </RadioGroup>
+
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/titlebar"
+        android:layout_below="@id/category_btn_group"
         />
 
 

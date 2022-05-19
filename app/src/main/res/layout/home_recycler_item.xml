@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_below="@+id/item_price"
-            android:background="#FF8F03"
+            android:background="#fec901"
             android:text="购买"
             android:textSize="10sp"
             />

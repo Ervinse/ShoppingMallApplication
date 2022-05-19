@@ -5,6 +5,10 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import java.util.ArrayList;
@@ -26,9 +30,12 @@ public class MainActivity extends FragmentActivity {
 
 
     //底部按钮组
-    private RadioGroup bottom_btn_group;
+    private RadioGroup bottom_btn_group,category_btn_group;
+
+
 
     ArrayList<BaseFragment> fragmentList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +65,23 @@ public class MainActivity extends FragmentActivity {
 
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        //Fragment初始化之后,为首页上的分类按钮创建监听器
+        category_btn_group = findViewById(R.id.category_btn_group);
+        category_btn_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                //TODO 各个分类跳转未实现
+                //TODO 存在bug:分类RadioGroup无法重复按下同一个选项
+                bottom_btn_group.check(R.id.type_bottom_btn);
+            }
+        });
+    }
 
     /**
      * 初始化碎片
@@ -104,6 +128,8 @@ public class MainActivity extends FragmentActivity {
                 switchFragment(tempFragemnt, baseFragment);
             }
         });
+
+
 
         //设置底部按钮中的'首页'在打开应用时被选中
         bottom_btn_group.check(R.id.home_bottom_btn);

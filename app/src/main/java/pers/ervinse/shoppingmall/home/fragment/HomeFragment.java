@@ -12,9 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pers.ervinse.shoppingmall.BaseFragment;
-import pers.ervinse.shoppingmall.MainActivity;
 import pers.ervinse.shoppingmall.R;
-import pers.ervinse.shoppingmall.community.adapter.HomeAdapter;
+import pers.ervinse.shoppingmall.home.adapter.HomeAdapter;
 import pers.ervinse.shoppingmall.domain.Goods;
 
 
