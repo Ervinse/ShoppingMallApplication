@@ -11,6 +11,7 @@ public class Goods implements Serializable {
     private String name, describe,location;
     private int number;
     private double price;
+    public Boolean isSelected = false;
     //TODO 商品图片
 
     public Goods() {
@@ -62,5 +63,25 @@ public class Goods implements Serializable {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Boolean getSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(Boolean selected) {
+        isSelected = selected;
+    }
+
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "name='" + name + '\'' +
+                ", describe='" + describe + '\'' +
+                ", location='" + location + '\'' +
+                ", number=" + number +
+                ", price=" + price +
+                ", isSelected=" + isSelected +
+                '}';
     }
 }

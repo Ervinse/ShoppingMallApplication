@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <!--购物车标题栏-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#fff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="30dp"
+            android:layout_weight="1"
+            android:text="购物车"
+            android:textColor="#303235"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/cart_edit_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="编辑"
+            android:textColor="#303235" />
+    </RelativeLayout>
+
+    <!--分割线-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#eeee" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--线性布局-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cart_item_rv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#eee" />
+
+            <!--结算的线性布局-->
+
+            <LinearLayout
+                android:id="@+id/cart_settle_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <CheckBox
+                    android:id="@+id/cart_check_all_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/checkbox_selector"
+                    android:drawablePadding="10dp"
+                    android:padding="10dp"
+                    android:paddingLeft="0dp"
+                    android:text="全选"
+                    android:textColor="#303235"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="合计:"
+                    android:textColor="#303235"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/cart_total_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="￥0.00"
+                    android:textColor="#ed3f3f"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/cart_settle_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#ed3f3f"
+                    android:text="去结算"
+                    android:textColor="#fff" />
+            </LinearLayout>
+
+            <!--删除的显示布局-->
+            <LinearLayout
+                android:id="@+id/cart_delete_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:visibility="gone">
+
+                <CheckBox
+                    android:id="@+id/cart_delete_all_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/checkbox_selector"
+                    android:drawablePadding="10dp"
+                    android:padding="10dp"
+                    android:paddingLeft="0dp"
+                    android:text="全选"
+                    android:textColor="#303235"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/cart_delete_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:background="@drawable/words"
+                    android:text="删除"
+                    android:textColor="#303235"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/cart_collection_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/wordsred"
+                    android:text="收藏"
+                    android:textColor="#ed3f3f"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+<!--        &lt;!&ndash;当数据为空的时候显示的布局&ndash;&gt;-->
+<!--        <include layout="@layout/empty_cart"></include>-->
+    </FrameLayout>
+
+</LinearLayout>
