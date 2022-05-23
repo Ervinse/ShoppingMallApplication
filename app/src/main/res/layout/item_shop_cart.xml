@@ -58,6 +58,17 @@
                     android:textColor="#f00"
                     android:textSize="10sp" />
 
+                <Button
+                    android:id="@+id/cart_item_delete_btn"
+                    android:layout_width="70dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/delete_cart_item_shape"
+                    android:text="删除"
+                    android:textColor="#ED7E7E"
+                    />
+
                 <LinearLayout
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="wrap_content"

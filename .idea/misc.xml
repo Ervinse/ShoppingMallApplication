@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/cart_button_selector.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/checkbox_selector.xml" value="0.14" />
         <entry key="app/src/main/res/drawable/community_button_selector.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/delete_button_shape.xml" value="0.14" />
         <entry key="app/src/main/res/drawable/home_button_selector.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/main.xml" value="0.1645" />
@@ -18,9 +19,9 @@
         <entry key="app/src/main/res/layout/activity_goods_info.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_shopping_cart.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_shopping_cart.xml" value="0.1" />
         <entry key="app/src/main/res/layout/home_recycler_item.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_shop_cart.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/item_shop_cart.xml" value="0.1" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/recycler_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/titlebar.xml" value="0.25" />

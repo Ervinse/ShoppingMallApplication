@@ -1,6 +1,7 @@
 package pers.ervinse.shoppingmall.shoppingcart.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
@@ -250,6 +252,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         private TextView cart_item_description_tv, cart_item_price_tv,cart_item_value_tv;
         //数量加减按钮
         private ImageView cart_item_sub_btn, cart_item_add_btn;
+        //删除商品按钮
+        private Button cart_item_delete_btn;
 
         //商品最大数量和最小数量
         private int MIN_NUM = 1,MAX_NUM = 99;
@@ -268,6 +272,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             cart_item_sub_btn = itemView.findViewById(R.id.cart_item_sub_btn);
             cart_item_add_btn = itemView.findViewById(R.id.cart_item_add_btn);
             cart_item_value_tv = itemView.findViewById(R.id.cart_item_value_tv);
+            cart_item_delete_btn = itemView.findViewById(R.id.cart_item_delete_btn);
 
             //减少商品数量按钮监听事件
             cart_item_sub_btn.setOnClickListener(new View.OnClickListener() {
@@ -316,6 +321,37 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                     if(onItemClickListener != null){
                         onItemClickListener.onItemClick(null,null,getLayoutPosition(),getLayoutPosition());
                     }
+                }
+            });
+
+            //TODO 只删除本地数据,未完成联网删除
+            //设置删除商品的点击事件
+            cart_item_delete_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d(TAG, "删除商品数量按钮监听方法");
+                    //设置删除按钮点击之后的弹出对话框
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
+                            .setTitle("删除商品")
+                            .setMessage("是否删除该商品?")
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //删除商品
+                                    goodsList.remove(getLayoutPosition());
+                                    //全局刷新
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+
                 }
             });
         }
