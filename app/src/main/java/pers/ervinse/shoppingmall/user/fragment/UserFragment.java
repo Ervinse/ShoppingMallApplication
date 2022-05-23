@@ -15,7 +15,7 @@ public class UserFragment extends BaseFragment {
 
     @Override
     public View initView() {
-        Log.e(TAG, "用户视图被初始化了");
+        Log.d(TAG, "用户视图被初始化了");
         textView = new TextView(mContext);
         textView.setGravity(Gravity.CENTER);
         textView.setTextSize(25);
@@ -25,7 +25,7 @@ public class UserFragment extends BaseFragment {
 
     public void initData() {
         super.initData();
-        Log.e(TAG, "用户数据被初始化了");
+        Log.d(TAG, "用户数据被初始化了");
         textView.setText("用户");
     }
 }

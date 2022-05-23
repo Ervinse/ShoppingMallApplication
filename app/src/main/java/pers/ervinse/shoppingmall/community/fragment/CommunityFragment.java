@@ -16,7 +16,7 @@ public class CommunityFragment extends BaseFragment {
 
     @Override
     public View initView() {
-        Log.e(TAG, "社区视图被初始化了");
+        Log.d(TAG, "社区视图被初始化了");
         textView = new TextView(mContext);
         textView.setGravity(Gravity.CENTER);
         textView.setTextSize(25);
@@ -26,7 +26,7 @@ public class CommunityFragment extends BaseFragment {
 
     public void initData() {
         super.initData();
-        Log.e(TAG, "社区数据被初始化了");
+        Log.d(TAG, "社区数据被初始化了");
         textView.setText("社区");
     }
 }
