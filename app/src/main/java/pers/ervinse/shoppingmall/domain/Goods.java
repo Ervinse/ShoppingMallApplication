@@ -8,7 +8,7 @@ import java.util.Objects;
  */
 public class Goods implements Serializable {
 
-    private String name, describe,location;
+    private String name, description,location;
     private int number;
     private double price;
     public Boolean isSelected = false;
@@ -17,12 +17,13 @@ public class Goods implements Serializable {
     public Goods() {
     }
 
-    public Goods(String name, String describe, String location, int number, double price) {
+    public Goods(String name, String description, String location, int number, double price, Boolean isSelected) {
         this.name = name;
-        this.describe = describe;
+        this.description = description;
         this.location = location;
         this.number = number;
         this.price = price;
+        this.isSelected = isSelected;
     }
 
     public String getName() {
@@ -33,12 +34,12 @@ public class Goods implements Serializable {
         this.name = name;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getLocation() {
@@ -74,10 +75,23 @@ public class Goods implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Goods goods = (Goods) o;
+        return number == goods.number && Double.compare(goods.price, price) == 0 && Objects.equals(name, goods.name) && Objects.equals(description, goods.description) && Objects.equals(location, goods.location) && Objects.equals(isSelected, goods.isSelected);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description, location, number, price, isSelected);
+    }
+
+    @Override
     public String toString() {
         return "Goods{" +
                 "name='" + name + '\'' +
-                ", describe='" + describe + '\'' +
+                ", description='" + description + '\'' +
                 ", location='" + location + '\'' +
                 ", number=" + number +
                 ", price=" + price +

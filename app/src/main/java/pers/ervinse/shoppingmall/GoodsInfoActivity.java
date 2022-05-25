@@ -47,7 +47,7 @@ public class GoodsInfoActivity extends Activity {
 
         goods_name_tv.setText(goods.getName());
         goods_price_tv.setText(String.valueOf(goods.getPrice()));
-        goods_description_tv.setText(goods.getDescribe());
+        goods_description_tv.setText(goods.getDescription());
         goods_location_tv.setText(goods.getLocation());
 
     }

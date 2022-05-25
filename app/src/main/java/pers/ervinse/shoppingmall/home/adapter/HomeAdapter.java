@@ -57,7 +57,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         holder.item_name_tv.setText(goodsList.get(position).getName());
-        holder.item_description_tv.setText(goodsList.get(position).getDescribe());
+        holder.item_description_tv.setText(goodsList.get(position).getDescription());
         holder.item_price_tv.setText(String.valueOf(goodsList.get(position).getPrice()));
         //TODO 绑定商品图片
     }
@@ -95,7 +95,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                     for (int i = 1;i < 20;i++){
                         Goods goods = new Goods();
                         goods.setName("商品" + String.valueOf(i));
-                        goods.setDescribe("这是商品" + String.valueOf(i) + "的描述");
+                        goods.setDescription("这是商品" + String.valueOf(i) + "的描述");
                         goods.setPrice(999.99);
                         goodsList.add(goods);
                     }

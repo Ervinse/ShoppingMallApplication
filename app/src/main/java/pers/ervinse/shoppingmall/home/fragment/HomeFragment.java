@@ -55,7 +55,7 @@ public class HomeFragment extends BaseFragment {
         for (int i = 1;i < 20;i++){
             Goods goods = new Goods();
             goods.setName("商品" + String.valueOf(i));
-            goods.setDescribe("这是商品" + String.valueOf(i) + "的描述");
+            goods.setDescription("这是商品" + String.valueOf(i) + "的描述");
             goods.setPrice(999.99);
             goodsList.add(goods);
         }
