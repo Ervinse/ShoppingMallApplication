@@ -1,31 +1,155 @@
 package pers.ervinse.shoppingmall.user.fragment;
 
-import android.graphics.Color;
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
+
 import pers.ervinse.shoppingmall.BaseFragment;
+import pers.ervinse.shoppingmall.LoginActivity;
+import pers.ervinse.shoppingmall.R;
 
 public class UserFragment extends BaseFragment {
 
     private static final String TAG = UserFragment.class.getSimpleName();
-    private TextView textView;
+    private static final int LOGIN_REQUEST_CODE = 1;
+
+    private boolean isLogin = false;
+
+    private ImageView user_photo_image;
+    private TextView user_name_tv, user_desc_tv;
+    private Button user_logout_btn;
+    private View user_bar;
+
+    private Bitmap bitmap;
+
 
     @Override
     public View initView() {
-        Log.d(TAG, "用户视图被初始化了");
-        textView = new TextView(mContext);
-        textView.setGravity(Gravity.CENTER);
-        textView.setTextSize(25);
-        textView.setTextColor(Color.RED);
-        return textView;
+        Log.d(TAG, "用户视图初始化");
+        View view = View.inflate(mContext, R.layout.fragment_user, null);
+        user_photo_image = view.findViewById(R.id.user_photo_image);
+        user_name_tv = view.findViewById(R.id.user_name_tv);
+        user_desc_tv = view.findViewById(R.id.user_desc_tv);
+        user_logout_btn = view.findViewById(R.id.user_logout_btn);
+        user_bar = view.findViewById(R.id.user_bar);
+
+        //获取用户头像控件,将其设置为圆角
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.item_example);
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        rectRoundBitmap();
+        circleBitmap(bitmap,width,height);
+
+
+        return view;
     }
 
     public void initData() {
         super.initData();
-        Log.d(TAG, "用户数据被初始化了");
-        textView.setText("用户");
+        Log.d(TAG, "用户数据初始化");
+
+        //登录
+        user_bar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "用户登录事件");
+                if (isLogin == false){
+
+                    //TODO 进入登录界面
+
+                    Log.d(TAG, "用户未登录");
+                    Intent intent = new Intent(mContext, LoginActivity.class);
+                    startActivityForResult(intent, LOGIN_REQUEST_CODE);
+
+                }
+            }
+        });
+
+        //登出
+        user_logout_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "用户登出事件");
+
+                //用户名恢复,简介不可见
+                user_name_tv.setText("请登录");
+                user_desc_tv.setVisibility(View.GONE);
+            }
+        });
+
+
     }
+
+    private void initListener(){
+
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //判断由哪一个intent发出当请求（是否是requestCode == 1）
+        switch (requestCode) {
+            case LOGIN_REQUEST_CODE:
+                //判断返回当数据是否正常（判断是否是resultCode == RESULT_OK）
+                if (resultCode == RESULT_OK) {
+                    //获取数据并打印
+                    String userName = data.getStringExtra("userName");
+                    System.out.println(userName);
+                    Log.d(TAG, "用户登录数据回传: userName = " + userName);
+
+                    user_name_tv.setText(userName);
+                    //TODO 获取并添加用户简介
+                }
+                break;
+            default:
+        }
+    }
+
+
+    /**
+     * 为 user_photo_image 控件添加 RoundedBitmapDrawable 圆角编辑类
+     */
+    private void rectRoundBitmap() {
+        RoundedBitmapDrawable bitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+        bitmapDrawable.setAntiAlias(true);
+        bitmapDrawable.setCornerRadius(50);
+        user_photo_image.setImageDrawable(bitmapDrawable);
+    }
+
+    /**
+     * 将bitmap图片进行剪切成正方形， 然后再设置圆角半径为正方形边长的一半
+     */
+    private void circleBitmap(Bitmap bitmap,int width,int height) {
+        Bitmap circle = null;
+        int min = Math.min(width, height);
+        int max = Math.max(width, height);
+        if (width == height) {
+            circle = Bitmap.createBitmap(bitmap, 0, 0, width, height);
+        } else {
+            // 居中裁剪
+            if (width > height) {
+                circle = Bitmap.createBitmap(bitmap, (max - min) / 2, 0, min, min);
+            } else {
+                circle = Bitmap.createBitmap(bitmap, 0, (max - min) / 2, min, min);
+            }
+        }
+        RoundedBitmapDrawable bitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), circle);
+        bitmapDrawable.setCornerRadius(min / 2);
+        bitmapDrawable.setAntiAlias(true);
+        user_photo_image.setImageDrawable(bitmapDrawable);
+    }
+
 }

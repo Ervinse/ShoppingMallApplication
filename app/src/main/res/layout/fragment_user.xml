@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+
+<!--    &lt;!&ndash;用户标题栏&ndash;&gt;-->
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:background="#fff">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:layout_marginLeft="30dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="我的"-->
+<!--            android:textColor="#303235"-->
+<!--            android:textSize="20sp" />-->
+<!--    </RelativeLayout>-->
+
+<!--    &lt;!&ndash;分割线&ndash;&gt;-->
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="5dp"-->
+<!--        android:background="#eeee"-->
+<!--        />-->
+
+    <LinearLayout
+        android:id="@+id/user_bar"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/user_background"
+
+        >
+
+        <ImageView
+            android:id="@+id/user_photo_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="35dp"
+            android:src="@drawable/item_example" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/user_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="45dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="请登录"/>
+
+            <TextView
+                android:id="@+id/user_desc_tv"
+                android:visibility="invisible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:text="简介: tough and hard"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/user_logout_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:text="退出登录" />
+
+
+</LinearLayout>

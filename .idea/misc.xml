@@ -20,12 +20,17 @@
         <entry key="app/src/main/res/drawable/search_home_shape.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/type_button_selector.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/user_button_selector.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/user_image_shape.xml" value="0.14" />
         <entry key="app/src/main/res/layout/activity_goods_info.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.286231884057971" />
+        <entry key="app/src/main/res/layout/fragment.xml" value="0.14537037037037037" />
         <entry key="app/src/main/res/layout/fragment_community.xml" value="0.286231884057971" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_shopping_cart.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_type.xml" value="0.286231884057971" />
+        <entry key="app/src/main/res/layout/fragment_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/home_recycler_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_shop_cart.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_type.xml" value="0.1" />
@@ -42,5 +47,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>

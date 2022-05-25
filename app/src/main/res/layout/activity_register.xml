@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/register_login_name_et"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:hint="请输入用户名:"/>
+
+    <EditText
+        android:id="@+id/register_login_password_et"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:hint="请输入密码:"/>
+
+    <EditText
+        android:id="@+id/register_login_desc_et"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:hint="请输入简介:"/>
+
+    <Button
+        android:id="@+id/register_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:text="注册新账户"/>
+
+</LinearLayout>
