@@ -6,11 +6,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+
+import java.io.IOException;
+
+import pers.ervinse.shoppingmall.domain.Result;
+import pers.ervinse.shoppingmall.domain.User;
+import pers.ervinse.shoppingmall.utils.OkhttpUtils;
 
 
 public class LoginActivity extends Activity {
@@ -20,8 +29,8 @@ public class LoginActivity extends Activity {
 
     private Context mContext;
 
-    private EditText login_name_et,login_password_et;
-    private Button user_register_btn,login_btn;
+    private EditText login_name_et, login_password_et;
+    private Button user_register_btn, login_btn;
 
     private String userName, userPassword;
 
@@ -43,33 +52,63 @@ public class LoginActivity extends Activity {
     /**
      * 初始化监听器
      */
-    private void initListener(){
+    private void initListener() {
 
         //登录按钮监听事件
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean loginSuccess = true;
+                Log.d(TAG, "登录按钮响应事件");
+
 
                 //获取当前输入框内容
                 userName = login_name_et.getText().toString();
                 userPassword = login_password_et.getText().toString();
 
-                //TODO 发送登录请求
 
-                //登录成功
-                if (loginSuccess){
-                    //回传用户名
-                    Intent intent = new Intent();
-                    intent.putExtra("userName", userName);
-                    setResult(RESULT_OK,intent);
-                    //销毁当前方法
-                    finish();
-                }else {
-                    //登录失败
-                    Toast.makeText(mContext, "登录失败", Toast.LENGTH_SHORT).show();
-                }
+                new Thread() {
+                    @Override
+                    public void run() {
+                        Log.d(TAG, "进入请求线程");
+                        boolean loginSuccess = true;
 
+                        //TODO 发送登录请求
+                        Gson gson = new Gson();
+                        User user = new User(userName, userPassword);
+                        String userJson = gson.toJson(user);
+                        Log.i(TAG, "请求json:" + userJson);
+                        String responseJson = null;
+                        Result result = null;
+                        try {
+                            responseJson = OkhttpUtils.doPost("http://10.171.94.226:80/users/login", userJson);
+                            Log.i(TAG, "响应json:" + responseJson);
+                            result = gson.fromJson(responseJson, Result.class);
+                            Log.i(TAG, "响应解析对象:" + result);
+                            loginSuccess = result.getFlag();
+
+
+                            //登录成功
+                            if (loginSuccess) {
+                                //回传用户名
+                                Intent intent = new Intent();
+                                intent.putExtra("userName", userName);
+                                setResult(RESULT_OK, intent);
+                                //销毁当前方法
+                                finish();
+                            } else {
+                                //登录失败
+                                //子线程中准备Toast
+                                Looper.prepare();
+                                Toast.makeText(mContext, "登录失败,用户名或密码错误", Toast.LENGTH_SHORT).show();
+                                Looper.loop();
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }.start();
             }
         });
 
@@ -81,7 +120,7 @@ public class LoginActivity extends Activity {
 
                 //跳转注册页面
                 Intent intent = new Intent(mContext, RegisterActivity.class);
-                startActivityForResult(intent,REGISTER_REQUEST_CODE);
+                startActivityForResult(intent, REGISTER_REQUEST_CODE);
             }
         });
     }
