@@ -63,7 +63,7 @@ public class MainActivity extends FragmentActivity {
         transaction.add(R.id.frameLayout, homeFragment).commit();
         tempFragemnt = homeFragment;
 
-        Log.d(TAG, "onCreate: 初始化完成");
+        Log.i(TAG, "onCreate: 初始化完成");
 
     }
 

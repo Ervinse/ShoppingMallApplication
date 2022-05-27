@@ -19,7 +19,7 @@ public class CommunityFragment extends BaseFragment {
 
     @Override
     public View initView() {
-        Log.d(TAG, "社区视图被初始化");
+        Log.i(TAG, "社区视图被初始化");
         View view = View.inflate(mContext, R.layout.fragment_community, null);
         view_pager = view.findViewById(R.id.view_pager);
         return view;
@@ -27,7 +27,7 @@ public class CommunityFragment extends BaseFragment {
 
     public void initData() {
         super.initData();
-        Log.d(TAG, "社区数据被初始化");
+        Log.i(TAG, "社区数据被初始化");
 
         //TODO 模拟数据
         //加载图片id数据

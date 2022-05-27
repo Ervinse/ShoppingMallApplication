@@ -32,7 +32,7 @@ public class LoginActivity extends Activity {
     private EditText login_name_et, login_password_et;
     private Button user_register_btn, login_btn;
 
-    private String userName, userPassword;
+    private String userName, userPassword,userDesc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,57 +58,15 @@ public class LoginActivity extends Activity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "登录按钮响应事件");
-
+                Log.i(TAG, "登录按钮响应事件");
 
                 //获取当前输入框内容
                 userName = login_name_et.getText().toString();
                 userPassword = login_password_et.getText().toString();
 
-
-                new Thread() {
-                    @Override
-                    public void run() {
-                        Log.d(TAG, "进入请求线程");
-                        boolean loginSuccess = true;
-
-                        //TODO 发送登录请求
-                        Gson gson = new Gson();
-                        User user = new User(userName, userPassword);
-                        String userJson = gson.toJson(user);
-                        Log.i(TAG, "请求json:" + userJson);
-                        String responseJson = null;
-                        Result result = null;
-                        try {
-                            responseJson = OkhttpUtils.doPost("http://10.171.94.226:80/users/login", userJson);
-                            Log.i(TAG, "响应json:" + responseJson);
-                            result = gson.fromJson(responseJson, Result.class);
-                            Log.i(TAG, "响应解析对象:" + result);
-                            loginSuccess = result.getFlag();
+                login();
 
 
-                            //登录成功
-                            if (loginSuccess) {
-                                //回传用户名
-                                Intent intent = new Intent();
-                                intent.putExtra("userName", userName);
-                                setResult(RESULT_OK, intent);
-                                //销毁当前方法
-                                finish();
-                            } else {
-                                //登录失败
-                                //子线程中准备Toast
-                                Looper.prepare();
-                                Toast.makeText(mContext, "登录失败,用户名或密码错误", Toast.LENGTH_SHORT).show();
-                                Looper.loop();
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-
-                    }
-                }.start();
             }
         });
 
@@ -116,13 +74,70 @@ public class LoginActivity extends Activity {
         user_register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "前往注册页面事件");
+                Log.i(TAG, "前往注册页面事件");
 
                 //跳转注册页面
                 Intent intent = new Intent(mContext, RegisterActivity.class);
                 startActivityForResult(intent, REGISTER_REQUEST_CODE);
             }
         });
+    }
+
+
+    /**
+     * 根据成员变量userName, userPassword
+     */
+    private void login(){
+
+        new Thread() {
+            @Override
+            public void run() {
+                Log.i(TAG, "进入请求登录线程");
+                boolean loginSuccess = true;
+
+
+                Gson gson = new Gson();
+                User user = new User(userName, userPassword);
+                String userJson = gson.toJson(user);
+                Log.i(TAG, "登录请求json:" + userJson);
+                String responseJson = null;
+                Result result = null;
+                try {
+                    //发送登录请求
+                    responseJson = OkhttpUtils.doPost("http://192.168.1.8:8088/users/login", userJson);
+                    Log.i(TAG, "登录请求响应json:" + responseJson);
+                    result = gson.fromJson(responseJson, Result.class);
+                    Log.i(TAG, "登录请求响应解析对象:" + result);
+                    loginSuccess = result.getFlag();
+
+                    //登录成功
+                    if (loginSuccess) {
+                        responseJson = OkhttpUtils.doGet("http://192.168.1.8:8088/users/getDescription/" + userName);
+                        Log.i(TAG, "获取描述请求响应json:" + responseJson);
+                        result = gson.fromJson(responseJson, Result.class);
+                        Log.i(TAG, "获取描述请求响应解析对象:" + result);
+                        userDesc = (String) result.getData();
+                        //回传用户名
+                        Intent intent = new Intent();
+                        intent.putExtra("userName", userName);
+                        intent.putExtra("userDesc", userDesc);
+                        setResult(RESULT_OK, intent);
+                        //销毁当前方法
+                        finish();
+                    } else {
+                        //登录失败
+                        //子线程中准备Toast
+                        Looper.prepare();
+                        Toast.makeText(mContext, "登录失败,用户名或密码错误", Toast.LENGTH_SHORT).show();
+                        Looper.loop();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }.start();
+
     }
 
     /**
@@ -139,15 +154,19 @@ public class LoginActivity extends Activity {
                 //判断返回当数据是否正常（判断是否是resultCode == RESULT_OK）
                 if (resultCode == RESULT_OK) {
                     //获取数据并打印
-                    String userName = data.getStringExtra("userName");
-                    String userPassword = data.getStringExtra("userPassword");
+                    userName = data.getStringExtra("userName");
+                    userPassword = data.getStringExtra("userPassword");
+                    userDesc = data.getStringExtra("userDesc");
                     System.out.println(userName);
-                    Log.d(TAG, "用户注册数据回传: " +
+                    Log.i(TAG, "用户注册数据回传: " +
                             "userName = " + userName +
-                            "userPassword = " + userPassword);
+                            ",userPassword = " + userPassword +
+                            ",userDesc = " + userDesc);
 
                     //TODO 获取并添加用户简介
                     //TODO 发送登录请求
+
+                    login();
                 }
                 break;
             default:

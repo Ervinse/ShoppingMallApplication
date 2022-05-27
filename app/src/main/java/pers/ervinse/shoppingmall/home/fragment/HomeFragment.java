@@ -36,7 +36,7 @@ public class HomeFragment extends BaseFragment {
      */
     @Override
     public View initView() {
-        Log.d(TAG, "主页视图初始化");
+        Log.i(TAG, "主页视图初始化");
         //为当前fragment加载布局文件
         View view = View.inflate(mContext, R.layout.fragment_home, null);
         rvHome = view.findViewById(R.id.rv_home);
@@ -47,7 +47,7 @@ public class HomeFragment extends BaseFragment {
 
     public void initData() {
         super.initData();
-        Log.d(TAG, "主页数据初始化");
+        Log.i(TAG, "主页数据初始化");
 
         //TODO 模拟数据
         //加载数据

@@ -29,7 +29,7 @@ public class TypeFragment extends BaseFragment {
 
     @Override
     public View initView() {
-        Log.d(TAG, "类别视图初始化");
+        Log.i(TAG, "类别视图初始化");
         //为当前fragment加载布局文件
         View view = View.inflate(mContext, R.layout.fragment_type, null);
         rv_type = view.findViewById(R.id.rv_type);
@@ -38,7 +38,7 @@ public class TypeFragment extends BaseFragment {
 
     public void initData() {
         super.initData();
-        Log.d(TAG, "类别数据初始化");
+        Log.i(TAG, "类别数据初始化");
 
 
         //TODO 模拟数据

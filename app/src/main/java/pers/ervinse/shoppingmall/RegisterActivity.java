@@ -2,17 +2,28 @@ package pers.ervinse.shoppingmall;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import java.io.IOException;
+
+import pers.ervinse.shoppingmall.domain.Result;
+import pers.ervinse.shoppingmall.domain.User;
+import pers.ervinse.shoppingmall.utils.OkhttpUtils;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = RegisterActivity.class.getSimpleName();
+    private Context mContext;
 
     private EditText register_login_name_et, register_login_password_et,register_login_desc_et;
     private Button register_btn;
@@ -23,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        mContext = this;
 
         register_login_name_et = findViewById(R.id.register_login_name_et);
         register_login_password_et = findViewById(R.id.register_login_password_et);
@@ -41,31 +53,62 @@ public class RegisterActivity extends AppCompatActivity {
         register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean registerSuccess = true;
-                Log.d(TAG, "注册请求事件");
+                Log.d(TAG, "注册请求注册事件");
 
                 userName = register_login_name_et.getText().toString();
                 userPassword = register_login_password_et.getText().toString();
                 userDesc = register_login_desc_et.getText().toString();
 
-                //TODO 发送注册请求
+                new Thread() {
+                    @Override
+                    public void run() {
+                        Log.d(TAG, "进入请求线程");
+                        boolean registerSuccess = true;
 
-                //注册成功
-                if(registerSuccess){
-                    Log.d(TAG, "注册请求成功");
-                    //注册成功
-                    Intent intent = new Intent();
+                        //发送登录请求
+                        Gson gson = new Gson();
+                        User user = new User(userName, userPassword,userDesc);
+                        String userJson = gson.toJson(user);
+                        Log.i(TAG, "请求json:" + userJson);
+                        String responseJson = null;
+                        Result result = null;
+                        try {
+                            responseJson = OkhttpUtils.doPost("http://192.168.1.8:8088/users/register", userJson);
+                            Log.i(TAG, "响应json:" + responseJson);
+                            result = gson.fromJson(responseJson, Result.class);
+                            Log.i(TAG, "响应解析对象:" + result);
+                            registerSuccess = result.getFlag();
 
-                    intent.putExtra("userName", userName);
-                    intent.putExtra("userPassword", userPassword);
-                    //回传用户名
-                    setResult(RESULT_OK,intent);
-                    //销毁当前方法
-                    finish();
-                } else {
-                    //注册失败
-                    Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
-                }
+
+                            //注册成功
+                            if(registerSuccess){
+                                Log.d(TAG, "注册请求成功");
+                                //注册成功
+                                Intent intent = new Intent();
+
+                                intent.putExtra("userName", userName);
+                                intent.putExtra("userPassword", userPassword);
+                                intent.putExtra("userDesc", userDesc);
+                                //回传用户名
+                                setResult(RESULT_OK,intent);
+                                //销毁当前方法
+                                finish();
+                            } else {
+                                //注册失败
+                                //子线程中准备Toast
+                                Looper.prepare();
+                                Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                                Looper.loop();
+                            }
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }.start();
+
+
             }
         });
     }

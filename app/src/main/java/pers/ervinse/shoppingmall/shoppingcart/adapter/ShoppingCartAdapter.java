@@ -84,7 +84,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             @Override
             public void onItemClick(AdapterView<?> adapterView, View item, int position, long id) {
 
-                Log.d(TAG, "购物车第" + position + "项数据点击事件");
+                Log.i(TAG, "购物车第" + position + "项数据点击事件");
                 //1.根据位置找到对应的Goods对象
                 Goods goods = goodsList.get(position);
                 //2.设置取反状态
@@ -278,7 +278,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             cart_item_sub_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d(TAG, "减少商品数量按钮监听方法");
+                    Log.i(TAG, "减少商品数量按钮监听方法");
                     //从数据集合中获取对应的商品
                     Goods goods = goodsList.get(getLayoutPosition());
                     //获取该商品减少之前的数量
@@ -298,7 +298,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             cart_item_add_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d(TAG, "增加商品数量按钮监听方法");
+                    Log.i(TAG, "增加商品数量按钮监听方法");
                     //从数据集合中获取对应的商品
                     Goods goods = goodsList.get(getLayoutPosition());
                     //获取该商品增加之前的数量
@@ -329,7 +329,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             cart_item_delete_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d(TAG, "删除商品数量按钮监听方法");
+                    Log.i(TAG, "删除商品数量按钮监听方法");
                     //设置删除按钮点击之后的弹出对话框
                     AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
                             .setTitle("删除商品")

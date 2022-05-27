@@ -32,7 +32,7 @@ public class ShoppingCartFragment extends BaseFragment {
 
     @Override
     public View initView() {
-        Log.d(TAG, "购物车视图被初始化了");
+        Log.i(TAG, "购物车视图被初始化了");
 
         View view = View.inflate(mContext, R.layout.fragment_shopping_cart, null);
         cart_total_tv = view.findViewById(R.id.cart_total_tv);
@@ -45,7 +45,7 @@ public class ShoppingCartFragment extends BaseFragment {
 
     public void initData() {
         super.initData();
-        Log.d(TAG, "购物车数据被初始化了");
+        Log.i(TAG, "购物车数据被初始化了");
 
         //TODO 模拟数据
         //加载数据
