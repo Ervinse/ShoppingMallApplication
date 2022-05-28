@@ -131,4 +131,9 @@ public class TypeFragment extends BaseFragment {
         }.start();
     }
 
+    @Override
+    public void saveData() {
+
+    }
+
 }

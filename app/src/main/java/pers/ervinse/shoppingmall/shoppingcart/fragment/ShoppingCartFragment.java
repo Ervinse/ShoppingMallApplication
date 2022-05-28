@@ -148,4 +148,36 @@ public class ShoppingCartFragment extends BaseFragment {
             }
         }.start();
     }
+
+    @Override
+    public void saveData() {
+        Log.i(TAG, "保存数据");
+
+        new Thread() {
+            @Override
+            public void run() {
+                Log.i(TAG, "进入保存购物车数据线程");
+
+
+                Gson gson = new Gson();
+                String goodsListJson = gson.toJson(goodsList);
+                Log.i(TAG, "保存购物车数据响应json:" + goodsListJson);
+                String responseJson = null;
+                try {
+                    //发送登录请求
+                    responseJson = OkhttpUtils.doPost("http://192.168.1.8:8088/cart/updateGoodsInfo",goodsListJson);
+                    Log.i(TAG, "保存购物车数据响应json:" + responseJson);
+                    responseJson = gson.fromJson(responseJson,String.class);
+                    Log.i(TAG, "保存购物车数据响应解析对象:" + responseJson);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Looper.prepare();
+                    Toast.makeText(mContext, "获取数据失败,服务器错误", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                }
+
+            }
+        }.start();
+    }
 }

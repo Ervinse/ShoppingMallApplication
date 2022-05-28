@@ -145,4 +145,9 @@ public class HomeFragment extends BaseFragment {
             }
         }.start();
     }
+
+    @Override
+    public void saveData() {
+
+    }
 }

@@ -182,4 +182,9 @@ public class UserFragment extends BaseFragment {
     public void refreshData() {
     }
 
+    @Override
+    public void saveData() {
+
+    }
+
 }

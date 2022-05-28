@@ -26,7 +26,7 @@ public class MainActivity extends FragmentActivity {
     private int fragmentIndex;
 
     //切换碎片时保存的临时碎片
-    private Fragment tempFragemnt;
+    private BaseFragment tempFragemnt;
 
 
     //底部按钮组
@@ -157,7 +157,7 @@ public class MainActivity extends FragmentActivity {
      * @param fromFragment 上次显示的Fragment
      * @param nextFragment 当前正要显示的Fragment
      */
-    private void switchFragment(Fragment fromFragment, BaseFragment nextFragment) {
+    private void switchFragment(BaseFragment fromFragment, BaseFragment nextFragment) {
         if (tempFragemnt != nextFragment) {
             tempFragemnt = nextFragment;
             if (nextFragment != null) {
@@ -166,12 +166,14 @@ public class MainActivity extends FragmentActivity {
                 if (!nextFragment.isAdded()) {
                     //隐藏当前Fragment
                     if (fromFragment != null) {
+                        fromFragment.saveData();
                         transaction.hide(fromFragment);
                     }
                     transaction.add(R.id.frameLayout, nextFragment).commit();
                 } else {
                     //隐藏当前Fragment
                     if (fromFragment != null) {
+                        fromFragment.saveData();
                         transaction.hide(fromFragment);
                     }
                     //切换页面时联网刷新数据

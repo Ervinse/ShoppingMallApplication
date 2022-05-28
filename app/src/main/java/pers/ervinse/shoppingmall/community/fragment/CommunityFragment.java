@@ -52,4 +52,9 @@ public class CommunityFragment extends BaseFragment {
     @Override
     public void refreshData() {
     }
+
+    @Override
+    public void saveData() {
+
+    }
 }
