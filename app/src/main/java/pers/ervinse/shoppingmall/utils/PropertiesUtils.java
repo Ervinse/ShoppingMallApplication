@@ -13,6 +13,12 @@ public class PropertiesUtils {
 
     Context mContext;
 
+    public static String getUrl(Context mContext){
+        String ip = PropertiesUtils.getIP(mContext);
+        String port = PropertiesUtils.getPort(mContext);
+        return "http://" + ip + ":" + port;
+    }
+
     public static String getIP(Context mContext){
 
         Properties properties = getProperties(mContext);

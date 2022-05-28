@@ -20,6 +20,7 @@ import java.io.IOException;
 
 import pers.ervinse.shoppingmall.domain.Goods;
 import pers.ervinse.shoppingmall.utils.OkhttpUtils;
+import pers.ervinse.shoppingmall.utils.PropertiesUtils;
 
 public class GoodsInfoActivity extends Activity {
 
@@ -69,7 +70,8 @@ public class GoodsInfoActivity extends Activity {
                         String goodsJson = gson.toJson(goodsForAdd);
                         try {
                             //发送添加到购物车请求
-                            responseJson = OkhttpUtils.doPost("http://192.168.1.8:8088/cart/addGoodsToCart",goodsJson);
+                            String url = PropertiesUtils.getUrl(mContext);
+                            responseJson = OkhttpUtils.doPost(url + "/cart/addGoodsToCart",goodsJson);
                             Log.i(TAG, "添加购物车商品响应json:" + responseJson);
                             responseJson = gson.fromJson(responseJson, String.class);
                             Log.i(TAG, "添加购物车商品响应解析对象:" + responseJson);

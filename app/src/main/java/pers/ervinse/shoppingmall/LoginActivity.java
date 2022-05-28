@@ -20,6 +20,7 @@ import java.io.IOException;
 import pers.ervinse.shoppingmall.domain.Result;
 import pers.ervinse.shoppingmall.domain.User;
 import pers.ervinse.shoppingmall.utils.OkhttpUtils;
+import pers.ervinse.shoppingmall.utils.PropertiesUtils;
 
 
 public class LoginActivity extends Activity {
@@ -103,7 +104,8 @@ public class LoginActivity extends Activity {
                 Result result = null;
                 try {
                     //发送登录请求
-                    responseJson = OkhttpUtils.doPost("http://192.168.1.8:8088/users/login", userJson);
+                    String url = PropertiesUtils.getUrl(mContext);
+                    responseJson = OkhttpUtils.doPost(url + "/users/login", userJson);
                     Log.i(TAG, "登录请求响应json:" + responseJson);
                     responseJson = gson.fromJson(responseJson,String.class);
                     Log.i(TAG, "登录请求响应解析数据:" + responseJson);
@@ -112,7 +114,7 @@ public class LoginActivity extends Activity {
                         if (responseJson.equals("true")){
 
 
-                            responseJson = OkhttpUtils.doGet("http://192.168.1.8:8088/users/getDescription/" + userName);
+                            responseJson = OkhttpUtils.doGet(url + "/users/getDescription/" + userName);
                             Log.i(TAG, "获取描述请求响应json:" + responseJson);
                             userDesc = gson.fromJson(responseJson, String.class);
                             Log.i(TAG, "获取描述请求响应解析数据:" + userDesc);

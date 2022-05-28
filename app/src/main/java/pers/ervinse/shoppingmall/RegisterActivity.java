@@ -19,6 +19,7 @@ import java.io.IOException;
 import pers.ervinse.shoppingmall.domain.Result;
 import pers.ervinse.shoppingmall.domain.User;
 import pers.ervinse.shoppingmall.utils.OkhttpUtils;
+import pers.ervinse.shoppingmall.utils.PropertiesUtils;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -73,7 +74,8 @@ public class RegisterActivity extends AppCompatActivity {
                         String responseJson = null;
                         Result result = null;
                         try {
-                            responseJson = OkhttpUtils.doPost("http://192.168.1.8:8088/users/register", userJson);
+                            String url = PropertiesUtils.getUrl(mContext);
+                            responseJson = OkhttpUtils.doPost(url + "/users/register", userJson);
                             Log.i(TAG, "注册请求响应json:" + responseJson);
                             responseJson = gson.fromJson(responseJson, String.class);
                             Log.i(TAG, "注册请求响应解析对象:" + responseJson);

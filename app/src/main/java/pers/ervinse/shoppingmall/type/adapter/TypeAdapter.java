@@ -23,6 +23,7 @@ import pers.ervinse.shoppingmall.GoodsInfoActivity;
 import pers.ervinse.shoppingmall.R;
 import pers.ervinse.shoppingmall.domain.Goods;
 import pers.ervinse.shoppingmall.utils.OkhttpUtils;
+import pers.ervinse.shoppingmall.utils.PropertiesUtils;
 
 public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.TypeViewHolder>{
 
@@ -121,7 +122,8 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.TypeViewHolder
                             String goodsJson = gson.toJson(goodsForAdd);
                             try {
                                 //发送登录请求
-                                responseJson = OkhttpUtils.doPost("http://192.168.1.8:8088/cart/addGoodsToCart",goodsJson);
+                                String url = PropertiesUtils.getUrl(mContext);
+                                responseJson = OkhttpUtils.doPost(url + "/cart/addGoodsToCart",goodsJson);
                                 Log.i(TAG, "添加购物车商品响应json:" + responseJson);
                                 responseJson = gson.fromJson(responseJson, String.class);
                                 Log.i(TAG, "添加购物车商品响应解析对象:" + responseJson);

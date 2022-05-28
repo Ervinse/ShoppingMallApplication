@@ -21,6 +21,7 @@ import pers.ervinse.shoppingmall.R;
 import pers.ervinse.shoppingmall.domain.Goods;
 import pers.ervinse.shoppingmall.type.adapter.TypeAdapter;
 import pers.ervinse.shoppingmall.utils.OkhttpUtils;
+import pers.ervinse.shoppingmall.utils.PropertiesUtils;
 
 public class TypeFragment extends BaseFragment {
 
@@ -56,7 +57,8 @@ public class TypeFragment extends BaseFragment {
                 String responseJson = null;
                 try {
                     //发送登录请求
-                    responseJson = OkhttpUtils.doGet("http://192.168.1.8:8088/goods");
+                    String url = PropertiesUtils.getUrl(mContext);
+                    responseJson = OkhttpUtils.doGet(url + "/goods");
                     Log.i(TAG, "获取商品响应json:" + responseJson);
                     goodsList = gson.fromJson(responseJson, new TypeToken<List<Goods>>() {
                     }.getType());
@@ -106,7 +108,8 @@ public class TypeFragment extends BaseFragment {
 
                 try {
                     //发送登录请求
-                    responseJson = OkhttpUtils.doGet("http://192.168.1.8:8088/goods");
+                    String url = PropertiesUtils.getUrl(mContext);
+                    responseJson = OkhttpUtils.doGet(url + "/goods");
                     Log.i(TAG, "获取商品响应json:" + responseJson);
                     goodsList = gson.fromJson(responseJson, new TypeToken<List<Goods>>() {
                     }.getType());

@@ -71,9 +71,7 @@ public class MainActivity extends FragmentActivity {
         Log.i(TAG, "onCreate: 初始化完成");
 
         //获取服务器地址
-        String ip = PropertiesUtils.getIP(this);
-        String port = PropertiesUtils.getPort(this);
-        String url = "http://" + ip + ":" + port;
+        String url = PropertiesUtils.getUrl(this);
         Log.i(TAG, "服务器地址为: " + url);
     }
 
