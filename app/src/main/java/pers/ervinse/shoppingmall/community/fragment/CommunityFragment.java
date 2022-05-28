@@ -48,4 +48,8 @@ public class CommunityFragment extends BaseFragment {
         //加载适配器
         view_pager.setAdapter(new CommunityPagerAdapter(mContext,list,titleList));
     }
+
+    @Override
+    public void refreshData() {
+    }
 }

@@ -178,4 +178,8 @@ public class UserFragment extends BaseFragment {
         user_photo_image.setImageDrawable(bitmapDrawable);
     }
 
+    @Override
+    public void refreshData() {
+    }
+
 }

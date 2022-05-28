@@ -85,7 +85,7 @@ public class LoginActivity extends Activity {
 
 
     /**
-     * 根据成员变量userName, userPassword
+     * 在子线程中发送登录请求
      */
     private void login(){
 
@@ -93,7 +93,6 @@ public class LoginActivity extends Activity {
             @Override
             public void run() {
                 Log.i(TAG, "进入请求登录线程");
-                boolean loginSuccess = true;
 
 
                 Gson gson = new Gson();
@@ -106,33 +105,38 @@ public class LoginActivity extends Activity {
                     //发送登录请求
                     responseJson = OkhttpUtils.doPost("http://192.168.1.8:8088/users/login", userJson);
                     Log.i(TAG, "登录请求响应json:" + responseJson);
-                    result = gson.fromJson(responseJson, Result.class);
-                    Log.i(TAG, "登录请求响应解析对象:" + result);
-                    loginSuccess = result.getFlag();
+                    responseJson = gson.fromJson(responseJson,String.class);
+                    Log.i(TAG, "登录请求响应解析数据:" + responseJson);
+                    if (responseJson != null){
+                        //登录成功
+                        if (responseJson.equals("true")){
 
-                    //登录成功
-                    if (loginSuccess) {
-                        responseJson = OkhttpUtils.doGet("http://192.168.1.8:8088/users/getDescription/" + userName);
-                        Log.i(TAG, "获取描述请求响应json:" + responseJson);
-                        result = gson.fromJson(responseJson, Result.class);
-                        Log.i(TAG, "获取描述请求响应解析对象:" + result);
-                        userDesc = (String) result.getData();
-                        //回传用户名
-                        Intent intent = new Intent();
-                        intent.putExtra("userName", userName);
-                        intent.putExtra("userDesc", userDesc);
-                        setResult(RESULT_OK, intent);
-                        //销毁当前方法
-                        finish();
-                    } else {
-                        //登录失败
-                        //子线程中准备Toast
-                        Looper.prepare();
-                        Toast.makeText(mContext, "登录失败,用户名或密码错误", Toast.LENGTH_SHORT).show();
-                        Looper.loop();
+
+                            responseJson = OkhttpUtils.doGet("http://192.168.1.8:8088/users/getDescription/" + userName);
+                            Log.i(TAG, "获取描述请求响应json:" + responseJson);
+                            userDesc = gson.fromJson(responseJson, String.class);
+                            Log.i(TAG, "获取描述请求响应解析数据:" + userDesc);
+                            //回传用户名
+                            Intent intent = new Intent();
+                            intent.putExtra("userName", userName);
+                            intent.putExtra("userDesc", userDesc);
+                            setResult(RESULT_OK, intent);
+                            //销毁当前方法
+                            finish();
+                        }else {
+                            //登录失败
+                            //子线程中准备Toast
+                            Looper.prepare();
+                            Toast.makeText(mContext, "登录失败,用户名或密码错误", Toast.LENGTH_SHORT).show();
+                            Looper.loop();
+                        }
                     }
+                //抛出异常
                 } catch (IOException e) {
                     e.printStackTrace();
+                    Looper.prepare();
+                    Toast.makeText(mContext, "服务器异常", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
                 }
 
             }
@@ -162,9 +166,6 @@ public class LoginActivity extends Activity {
                             "userName = " + userName +
                             ",userPassword = " + userPassword +
                             ",userDesc = " + userDesc);
-
-                    //TODO 获取并添加用户简介
-                    //TODO 发送登录请求
 
                     login();
                 }

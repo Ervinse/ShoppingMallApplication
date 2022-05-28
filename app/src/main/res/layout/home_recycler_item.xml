@@ -54,8 +54,7 @@
             android:layout_below="@+id/item_price"
             android:background="#fec901"
             android:text="购买"
-            android:textSize="10sp"
-            />
+            android:textSize="10sp" />
     </RelativeLayout>
 
 </LinearLayout>

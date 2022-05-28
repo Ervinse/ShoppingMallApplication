@@ -2,6 +2,7 @@ package pers.ervinse.shoppingmall;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,4 +57,6 @@ public abstract class BaseFragment extends Fragment {
     public void initData() {
 
     }
+
+    public abstract void refreshData() ;
 }

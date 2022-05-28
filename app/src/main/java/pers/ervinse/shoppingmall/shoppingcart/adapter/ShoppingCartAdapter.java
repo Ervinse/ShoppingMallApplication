@@ -2,6 +2,8 @@ package pers.ervinse.shoppingmall.shoppingcart.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,19 +18,25 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
 
 import pers.ervinse.shoppingmall.R;
 import pers.ervinse.shoppingmall.domain.Goods;
+import pers.ervinse.shoppingmall.utils.OkhttpUtils;
 
 public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapter.ViewHolder> {
 
     private static final String TAG = "ShoppingCartAdapter";
     //上下文
     private final Context mContext;
+
+    private Handler handler = new Handler();
     //数据集合
-    private final List<Goods> goodsList;
+    private List<Goods> goodsList;
     //总价TextView
     private final TextView cart_total_tv;
     //全选,全删CheckBox
@@ -37,6 +45,17 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     private AdapterView.OnItemClickListener onItemClickListener;
 
     View itemView;
+
+    public void setGoodsList(List<Goods> goodsList) {
+        this.goodsList = goodsList;
+    }
+
+    /**
+     * 刷新所有数据
+     */
+    public void flushView(){
+        notifyDataSetChanged();
+    }
 
     /**
      * 创建购物车适配器
@@ -324,7 +343,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 }
             });
 
-            //TODO 只删除本地数据,未完成联网删除
             //设置删除商品的点击事件
             cart_item_delete_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -337,10 +355,51 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                             .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    //删除商品
-                                    goodsList.remove(getLayoutPosition());
-                                    //全局刷新
-                                    notifyDataSetChanged();
+                                    new Thread() {
+                                        @Override
+                                        public void run() {
+                                            Log.i(TAG, "进入获取商品线程");
+
+
+                                            Gson gson = new Gson();
+                                            String responseJson = null;
+
+                                            Goods goodsForAdd = new Goods();
+                                            goodsForAdd.setName(goodsList.get(getLayoutPosition()).getName());
+                                            String goodsJson = gson.toJson(goodsForAdd);
+                                            try {
+                                                //发送删除请求
+                                                responseJson = OkhttpUtils.doPost("http://192.168.1.8:8088/cart/deleteByName",goodsJson);
+                                                Log.i(TAG, "删除购物车商品响应json:" + responseJson);
+                                                responseJson = gson.fromJson(responseJson, String.class);
+                                                Log.i(TAG, "删除购物车商品响应解析对象:" + responseJson);
+
+                                                //删除成功
+                                                if (responseJson != null) {
+                                                    if (responseJson.equals("true")){
+
+                                                        handler.post(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                //全局刷新
+                                                                goodsList.remove(getLayoutPosition());
+                                                                notifyDataSetChanged();
+                                                                Toast.makeText(mContext, "商品已删除", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        });
+
+                                                    }
+                                                }
+
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                                Looper.prepare();
+                                                Toast.makeText(mContext, "获取数据失败,服务器错误", Toast.LENGTH_SHORT).show();
+                                                Looper.loop();
+                                            }
+
+                                        }
+                                    }.start();
                                 }
                             })
                             .setNegativeButton("取消", new DialogInterface.OnClickListener() {

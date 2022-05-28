@@ -62,47 +62,50 @@ public class RegisterActivity extends AppCompatActivity {
                 new Thread() {
                     @Override
                     public void run() {
-                        Log.d(TAG, "进入请求线程");
+                        Log.d(TAG, "进入注册请求线程");
                         boolean registerSuccess = true;
 
                         //发送登录请求
                         Gson gson = new Gson();
                         User user = new User(userName, userPassword,userDesc);
                         String userJson = gson.toJson(user);
-                        Log.i(TAG, "请求json:" + userJson);
+                        Log.i(TAG, "注册请求请求json:" + userJson);
                         String responseJson = null;
                         Result result = null;
                         try {
                             responseJson = OkhttpUtils.doPost("http://192.168.1.8:8088/users/register", userJson);
-                            Log.i(TAG, "响应json:" + responseJson);
-                            result = gson.fromJson(responseJson, Result.class);
-                            Log.i(TAG, "响应解析对象:" + result);
-                            registerSuccess = result.getFlag();
-
-
-                            //注册成功
-                            if(registerSuccess){
-                                Log.d(TAG, "注册请求成功");
+                            Log.i(TAG, "注册请求响应json:" + responseJson);
+                            responseJson = gson.fromJson(responseJson, String.class);
+                            Log.i(TAG, "注册请求响应解析对象:" + responseJson);
+                            if (responseJson != null){
                                 //注册成功
-                                Intent intent = new Intent();
+                                if (responseJson.equals("true")){
+                                    Log.d(TAG, "注册请求成功");
+                                    //注册成功
+                                    Intent intent = new Intent();
 
-                                intent.putExtra("userName", userName);
-                                intent.putExtra("userPassword", userPassword);
-                                intent.putExtra("userDesc", userDesc);
-                                //回传用户名
-                                setResult(RESULT_OK,intent);
-                                //销毁当前方法
-                                finish();
-                            } else {
-                                //注册失败
-                                //子线程中准备Toast
-                                Looper.prepare();
-                                Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
-                                Looper.loop();
+                                    intent.putExtra("userName", userName);
+                                    intent.putExtra("userPassword", userPassword);
+                                    intent.putExtra("userDesc", userDesc);
+                                    //回传用户名
+                                    setResult(RESULT_OK,intent);
+                                    //销毁当前方法
+                                    finish();
+
+                                }else {
+                                    //注册失败
+                                    //子线程中准备Toast
+                                    Looper.prepare();
+                                    Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                                    Looper.loop();
+                                }
                             }
 
                         } catch (IOException e) {
                             e.printStackTrace();
+                            Looper.prepare();
+                            Toast.makeText(RegisterActivity.this, "服务器异常", Toast.LENGTH_SHORT).show();
+                            Looper.loop();
                         }
 
                     }

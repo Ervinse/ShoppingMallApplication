@@ -186,7 +186,7 @@
             android:textColor="#393b3e" />
 
         <Button
-            android:id="@+id/btn_good_info_addcart"
+            android:id="@+id/good_info_add_cart_btn"
             android:layout_width="120dp"
             android:layout_height="51dp"
             android:layout_gravity="center"

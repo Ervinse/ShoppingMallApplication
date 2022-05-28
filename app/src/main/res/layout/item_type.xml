@@ -56,13 +56,13 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/cart_item_delete_btn"
+        android:id="@+id/item_add_cart_btn"
         android:layout_width="70dp"
         android:layout_height="25dp"
         android:layout_marginTop="12dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/add_type_item_shape"
-        android:text="删除"
+        android:text="添加到购物车"
         android:textColor="#FF8F03" />
 
 

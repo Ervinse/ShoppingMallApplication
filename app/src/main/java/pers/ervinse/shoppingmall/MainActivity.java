@@ -174,6 +174,8 @@ public class MainActivity extends FragmentActivity {
                     if (fromFragment != null) {
                         transaction.hide(fromFragment);
                     }
+                    //切换页面时联网刷新数据
+                    nextFragment.refreshData();
                     transaction.show(nextFragment).commit();
                 }
             }
