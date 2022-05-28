@@ -11,13 +11,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Properties;
+import java.util.ResourceBundle;
 
 import pers.ervinse.shoppingmall.community.fragment.CommunityFragment;
 import pers.ervinse.shoppingmall.home.fragment.HomeFragment;
 import pers.ervinse.shoppingmall.shoppingcart.fragment.ShoppingCartFragment;
 import pers.ervinse.shoppingmall.type.fragment.TypeFragment;
 import pers.ervinse.shoppingmall.user.fragment.UserFragment;
+import pers.ervinse.shoppingmall.utils.PropertiesUtils;
 
 public class MainActivity extends FragmentActivity {
 
@@ -65,6 +70,11 @@ public class MainActivity extends FragmentActivity {
 
         Log.i(TAG, "onCreate: 初始化完成");
 
+        //获取服务器地址
+        String ip = PropertiesUtils.getIP(this);
+        String port = PropertiesUtils.getPort(this);
+        String url = "http://" + ip + ":" + port;
+        Log.i(TAG, "服务器地址为: " + url);
     }
 
 
