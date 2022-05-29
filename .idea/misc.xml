@@ -33,7 +33,7 @@
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/home_recycler_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_shop_cart.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/item_type.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_type.xml" value="0.1" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/page_community.xml" value="0.1453125" />
         <entry key="app/src/main/res/layout/recycler_item.xml" value="0.25" />
