@@ -23,9 +23,13 @@ import pers.ervinse.shoppingmall.type.adapter.TypeAdapter;
 import pers.ervinse.shoppingmall.utils.OkhttpUtils;
 import pers.ervinse.shoppingmall.utils.PropertiesUtils;
 
+/**
+ * 全部商品碎片
+ */
 public class TypeFragment extends BaseFragment {
 
     private static final String TAG = TypeFragment.class.getSimpleName();
+    //线程处理器
     private Handler handler = new Handler();
 
     private RecyclerView rv_type;
@@ -33,6 +37,10 @@ public class TypeFragment extends BaseFragment {
 
     List<Goods> goodsList;
 
+    /**
+     * 初始化视图
+     * @return
+     */
     @Override
     public View initView() {
         Log.i(TAG, "类别视图初始化");
@@ -42,21 +50,22 @@ public class TypeFragment extends BaseFragment {
         return view;
     }
 
+    /**
+     * 初始化数据
+     */
     public void initData() {
         super.initData();
         Log.i(TAG, "类别数据初始化");
-
 
         new Thread() {
             @Override
             public void run() {
                 Log.i(TAG, "进入获取商品线程");
 
-
                 Gson gson = new Gson();
                 String responseJson = null;
                 try {
-                    //发送登录请求
+                    //发送获取商品请求
                     String url = PropertiesUtils.getUrl(mContext);
                     responseJson = OkhttpUtils.doGet(url + "/goods");
                     Log.i(TAG, "获取商品响应json:" + responseJson);
@@ -64,8 +73,9 @@ public class TypeFragment extends BaseFragment {
                     }.getType());
                     Log.i(TAG, "获取商品响应解析对象:" + goodsList);
 
-                    //加创建商品布局
+                    //获取商品商品成功
                     if (goodsList != null) {
+                        //切回主线程加载视图
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -80,7 +90,6 @@ public class TypeFragment extends BaseFragment {
                             }
                         });
                     }
-
                 } catch (IOException e) {
                     e.printStackTrace();
                     Looper.prepare();
@@ -90,15 +99,15 @@ public class TypeFragment extends BaseFragment {
 
             }
         }.start();
-
-
     }
 
+    /**
+     * 刷新数据
+     */
     @Override
     public void refreshData() {
         Log.i(TAG, "联网刷新数据");
         new Thread() {
-            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void run() {
                 Log.i(TAG, "进入获取商品线程");
@@ -107,7 +116,7 @@ public class TypeFragment extends BaseFragment {
                 String responseJson = null;
 
                 try {
-                    //发送登录请求
+                    //发送获取商品请求
                     String url = PropertiesUtils.getUrl(mContext);
                     responseJson = OkhttpUtils.doGet(url + "/goods");
                     Log.i(TAG, "获取商品响应json:" + responseJson);
@@ -115,11 +124,13 @@ public class TypeFragment extends BaseFragment {
                     }.getType());
                     Log.i(TAG, "获取商品响应解析对象:" + goodsList);
 
+                    //切回主线程更新视图
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-
+                            //更新数据
                             adapter.setGoodsList(goodsList);
+                            //刷新视图
                             adapter.flushView();
                         }
                     });

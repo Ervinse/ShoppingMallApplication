@@ -26,6 +26,7 @@ public class UserFragment extends BaseFragment {
     private static final String TAG = UserFragment.class.getSimpleName();
     private static final int LOGIN_REQUEST_CODE = 1;
 
+    //当前登录状态
     private boolean isLogin = false;
 
     private ImageView user_photo_image;
@@ -36,6 +37,10 @@ public class UserFragment extends BaseFragment {
     private Bitmap bitmap;
 
 
+    /**
+     * 初始化视图
+     * @return
+     */
     @Override
     public View initView() {
         Log.i(TAG, "用户视图初始化");
@@ -57,6 +62,7 @@ public class UserFragment extends BaseFragment {
         return view;
     }
 
+    //初始化数据
     public void initData() {
         super.initData();
         Log.i(TAG, "用户数据初始化");
@@ -65,6 +71,9 @@ public class UserFragment extends BaseFragment {
 
     }
 
+    /**
+     * 初始化监听器
+     */
     private void initListener() {
         //登录
         user_bar.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +83,7 @@ public class UserFragment extends BaseFragment {
                 if (isLogin == false) {
 
                     Log.i(TAG, "用户未登录");
+                    //前往登录页面
                     Intent intent = new Intent(mContext, LoginActivity.class);
                     startActivityForResult(intent, LOGIN_REQUEST_CODE);
                 }
@@ -119,6 +129,12 @@ public class UserFragment extends BaseFragment {
 
     }
 
+    /**
+     * 数据回传
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

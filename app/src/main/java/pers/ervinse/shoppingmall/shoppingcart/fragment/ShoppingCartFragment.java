@@ -27,18 +27,29 @@ import pers.ervinse.shoppingmall.shoppingcart.adapter.ShoppingCartAdapter;
 import pers.ervinse.shoppingmall.utils.OkhttpUtils;
 import pers.ervinse.shoppingmall.utils.PropertiesUtils;
 
+/**
+ * 购物车碎片
+ */
 public class ShoppingCartFragment extends BaseFragment {
 
     private static final String TAG = ShoppingCartFragment.class.getSimpleName();
+    //线程处理器
     private Handler handler = new Handler();
 
+    //总价
     private TextView cart_total_tv;
+    //全选,全删
     private CheckBox cart_check_all_checkbox,cart_delete_all_checkbox;
+
     RecyclerView cart_item_rv;
     List<Goods> goodsList;
 
     ShoppingCartAdapter adapter;
 
+    /**
+     * 初始化视图
+     * @return
+     */
     @Override
     public View initView() {
         Log.i(TAG, "购物车视图被初始化了");
@@ -52,6 +63,9 @@ public class ShoppingCartFragment extends BaseFragment {
         return view;
     }
 
+    /**
+     * 初始化数据
+     */
     public void initData() {
         super.initData();
         Log.i(TAG, "购物车数据被初始化了");
@@ -59,8 +73,7 @@ public class ShoppingCartFragment extends BaseFragment {
         new Thread() {
             @Override
             public void run() {
-                Log.i(TAG, "进入获取商品线程");
-
+                Log.i(TAG, "进入获取购物车商品线程");
 
                 Gson gson = new Gson();
                 String responseJson = null;
@@ -73,8 +86,9 @@ public class ShoppingCartFragment extends BaseFragment {
                     }.getType());
                     Log.i(TAG, "获取购物车商品响应解析对象:" + goodsList);
 
-                    //加创建商品布局
+                    //获取数据成功,加创建商品布局
                     if (goodsList != null) {
+                        //切回主线程加载视图
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -89,7 +103,6 @@ public class ShoppingCartFragment extends BaseFragment {
                             }
                         });
                     }
-
                 } catch (IOException e) {
                     e.printStackTrace();
                     Looper.prepare();
@@ -100,11 +113,12 @@ public class ShoppingCartFragment extends BaseFragment {
             }
         }.start();
 
-
-
     }
 
 
+    /**
+     * 刷新数据
+     */
     @Override
     public void refreshData() {
 
@@ -113,7 +127,7 @@ public class ShoppingCartFragment extends BaseFragment {
         new Thread() {
             @Override
             public void run() {
-                Log.i(TAG, "进入获取商品线程");
+                Log.i(TAG, "进入获取购物车商品线程");
 
 
                 Gson gson = new Gson();
@@ -127,7 +141,7 @@ public class ShoppingCartFragment extends BaseFragment {
                     }.getType());
                     Log.i(TAG, "获取购物车商品响应解析对象:" + goodsList);
 
-                    //加创建商品布局
+                    //数据获取成功,加创建商品布局
                     if (goodsList != null) {
                         handler.post(new Runnable() {
                             @Override
@@ -149,6 +163,9 @@ public class ShoppingCartFragment extends BaseFragment {
         }.start();
     }
 
+    /**
+     * 将当前商品数据保存到服务器中
+     */
     @Override
     public void saveData() {
         Log.i(TAG, "保存数据");
@@ -158,13 +175,12 @@ public class ShoppingCartFragment extends BaseFragment {
             public void run() {
                 Log.i(TAG, "进入保存购物车数据线程");
 
-
                 Gson gson = new Gson();
                 String goodsListJson = gson.toJson(goodsList);
                 Log.i(TAG, "保存购物车数据响应json:" + goodsListJson);
                 String responseJson = null;
                 try {
-                    //发送登录请求
+                    //发送获取购物车商品请求
                     String url = PropertiesUtils.getUrl(mContext);
                     responseJson = OkhttpUtils.doPost(url + "/cart/updateGoodsInfo",goodsListJson);
                     Log.i(TAG, "保存购物车数据响应json:" + responseJson);

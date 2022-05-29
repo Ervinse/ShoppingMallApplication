@@ -34,7 +34,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     private static final String TAG = "ShoppingCartAdapter";
     //上下文
     private final Context mContext;
-
+    //线程处理器
     private Handler handler = new Handler();
     //数据集合
     private List<Goods> goodsList;
@@ -47,6 +47,10 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
     View itemView;
 
+    /**
+     * 供外部使用,更新goodsList数据
+     * @param goodsList
+     */
     public void setGoodsList(List<Goods> goodsList) {
         this.goodsList = goodsList;
     }
@@ -348,7 +352,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             cart_item_delete_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.i(TAG, "删除商品数量按钮监听方法");
+                    Log.i(TAG, "删除购物车商品数量按钮监听方法");
                     //设置删除按钮点击之后的弹出对话框
                     AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
                             .setTitle("删除商品")
@@ -359,12 +363,12 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                     new Thread() {
                                         @Override
                                         public void run() {
-                                            Log.i(TAG, "进入获取商品线程");
+                                            Log.i(TAG, "进入删除购物车商品数量线程");
 
 
                                             Gson gson = new Gson();
                                             String responseJson = null;
-
+                                            //获取要删除的商品名
                                             Goods goodsForAdd = new Goods();
                                             goodsForAdd.setName(goodsList.get(getLayoutPosition()).getName());
                                             String goodsJson = gson.toJson(goodsForAdd);
@@ -379,7 +383,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                                 //删除成功
                                                 if (responseJson != null) {
                                                     if (responseJson.equals("true")){
-
+                                                        //切回主线程刷新视图
                                                         handler.post(new Runnable() {
                                                             @Override
                                                             public void run() {
@@ -389,7 +393,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                                                 Toast.makeText(mContext, "商品已删除", Toast.LENGTH_SHORT).show();
                                                             }
                                                         });
-
                                                     }
                                                 }
 
@@ -410,6 +413,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
                                 }
                             });
+                    //创建删除对话框并显示
                     AlertDialog alertDialog = builder.create();
                     alertDialog.show();
 

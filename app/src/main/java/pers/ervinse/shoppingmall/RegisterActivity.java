@@ -31,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private String userName,userPassword, userDesc;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,14 +67,13 @@ public class RegisterActivity extends AppCompatActivity {
                         Log.d(TAG, "进入注册请求线程");
                         boolean registerSuccess = true;
 
-                        //发送登录请求
                         Gson gson = new Gson();
                         User user = new User(userName, userPassword,userDesc);
                         String userJson = gson.toJson(user);
                         Log.i(TAG, "注册请求请求json:" + userJson);
                         String responseJson = null;
-                        Result result = null;
                         try {
+                            //发送注册请求
                             String url = PropertiesUtils.getUrl(mContext);
                             responseJson = OkhttpUtils.doPost(url + "/users/register", userJson);
                             Log.i(TAG, "注册请求响应json:" + responseJson);
@@ -83,13 +83,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 //注册成功
                                 if (responseJson.equals("true")){
                                     Log.d(TAG, "注册请求成功");
-                                    //注册成功
+                                    //将新注册的用户数据回传到登录页面
                                     Intent intent = new Intent();
-
                                     intent.putExtra("userName", userName);
                                     intent.putExtra("userPassword", userPassword);
                                     intent.putExtra("userDesc", userDesc);
-                                    //回传用户名
+                                    //设置数据状态
                                     setResult(RESULT_OK,intent);
                                     //销毁当前方法
                                     finish();

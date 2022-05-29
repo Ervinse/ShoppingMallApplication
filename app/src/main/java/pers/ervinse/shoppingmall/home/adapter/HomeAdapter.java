@@ -37,6 +37,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     private Context mContext;
 
 
+    /**
+     * 供外部使用,更新goodsList数据
+     * @param goodsList
+     */
     public void setGoodsList(List<Goods> goodsList) {
         this.goodsList = goodsList;
     }
@@ -108,6 +112,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             item_image = itemView.findViewById(R.id.item_image);
             buy_button = itemView.findViewById(R.id.buy_button);
 
+            /**
+             * item监听事件
+             */
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -120,45 +127,47 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                 }
             });
 
+            /**
+             * 购买按钮监听事件
+             */
             buy_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     new Thread() {
                         @Override
                         public void run() {
-                            Log.i(TAG, "进入添加购物车商品线程");
-
+                            Log.i(TAG, "进入添加购物车线程");
 
 
                             Gson gson = new Gson();
                             String responseJson = null;
 
+                            //获取当前点击的item位置,并获取对应的商品数据
                             Goods goodsByClick = goodsList.get(getLayoutPosition());
                             Goods goodsForAdd = new Goods();
                             goodsForAdd.setName(goodsByClick.getName());
                             String goodsJson = gson.toJson(goodsForAdd);
                             try {
-                                //发送登录请求
+                                //发送添加购物车请求
                                 String url = PropertiesUtils.getUrl(mContext);
                                 responseJson = OkhttpUtils.doPost(url + "/cart/addGoodsToCart",goodsJson);
                                 Log.i(TAG, "添加购物车商品响应json:" + responseJson);
                                 responseJson = gson.fromJson(responseJson, String.class);
                                 Log.i(TAG, "添加购物车商品响应解析对象:" + responseJson);
 
-                                //加创建商品布局
                                 if (responseJson != null) {
+                                    //添加成功
                                     if (responseJson.equals("true")){
                                         Looper.prepare();
                                         Toast.makeText(mContext, "商品已添加到购物车", Toast.LENGTH_SHORT).show();
                                         Looper.loop();
+                                    //添加失败,已经添加到购物车
                                     }else {
                                         Looper.prepare();
                                         Toast.makeText(mContext, "商品已经在购物车啦", Toast.LENGTH_SHORT).show();
                                         Looper.loop();
                                     }
-
                                 }
-
                             } catch (IOException e) {
                                 e.printStackTrace();
                                 Looper.prepare();

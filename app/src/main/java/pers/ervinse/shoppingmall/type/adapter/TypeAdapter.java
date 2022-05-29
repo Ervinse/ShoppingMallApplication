@@ -25,6 +25,9 @@ import pers.ervinse.shoppingmall.domain.Goods;
 import pers.ervinse.shoppingmall.utils.OkhttpUtils;
 import pers.ervinse.shoppingmall.utils.PropertiesUtils;
 
+/**
+ * 全部商品数据适配器
+ */
 public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.TypeViewHolder>{
 
     private static final String TAG = TypeAdapter.class.getSimpleName();
@@ -34,6 +37,10 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.TypeViewHolder
     //上下文
     private Context mContext;
 
+    /**
+     * 供外部使用,更新goodsList数据
+     * @param goodsList
+     */
     public void setGoodsList(List<Goods> goodsList) {
         this.goodsList = goodsList;
     }
@@ -89,12 +96,14 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.TypeViewHolder
             item_image = itemView.findViewById(R.id.item_image);
             item_add_cart_btn = itemView.findViewById(R.id.item_add_cart_btn);
 
-
+            /**
+             * item点击事件监听
+             */
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    //加载数据
+                    //前往商品详情页面,并传入数据
                     Goods goodsByClick = goodsList.get(getLayoutPosition());
                     Intent intent = new Intent(mContext, GoodsInfoActivity.class);
                     intent.putExtra("goods", goodsByClick);
@@ -102,6 +111,9 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.TypeViewHolder
                 }
             });
 
+            /**
+             * 添加到购物车按钮监听事件
+             */
             item_add_cart_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -111,35 +123,34 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.TypeViewHolder
                         public void run() {
                             Log.i(TAG, "进入添加购物车商品线程");
 
-
-
                             Gson gson = new Gson();
                             String responseJson = null;
 
+                            //获取当前商品名
                             Goods goodsByClick = goodsList.get(getLayoutPosition());
                             Goods goodsForAdd = new Goods();
                             goodsForAdd.setName(goodsByClick.getName());
                             String goodsJson = gson.toJson(goodsForAdd);
                             try {
-                                //发送登录请求
+                                //发送添加购购物车请求
                                 String url = PropertiesUtils.getUrl(mContext);
                                 responseJson = OkhttpUtils.doPost(url + "/cart/addGoodsToCart",goodsJson);
                                 Log.i(TAG, "添加购物车商品响应json:" + responseJson);
                                 responseJson = gson.fromJson(responseJson, String.class);
                                 Log.i(TAG, "添加购物车商品响应解析对象:" + responseJson);
 
-                                //加创建商品布局
                                 if (responseJson != null) {
+                                    //添加成功
                                     if (responseJson.equals("true")){
                                         Looper.prepare();
                                         Toast.makeText(mContext, "商品已添加到购物车", Toast.LENGTH_SHORT).show();
                                         Looper.loop();
+                                    //添加失败,商品已经在购物车中
                                     }else {
                                         Looper.prepare();
                                         Toast.makeText(mContext, "商品已经在购物车啦", Toast.LENGTH_SHORT).show();
                                         Looper.loop();
                                     }
-
                                 }
 
                             } catch (IOException e) {
@@ -148,14 +159,10 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.TypeViewHolder
                                 Toast.makeText(mContext, "获取数据失败,服务器错误", Toast.LENGTH_SHORT).show();
                                 Looper.loop();
                             }
-
                         }
                     }.start();
                 }
             });
-
         }
-
-
     }
 }

@@ -28,10 +28,16 @@ public class GoodsInfoActivity extends Activity {
     private Goods goods;
     private Context mContext;
 
+    //返回按钮
     private ImageView good_info_back_btn;
     private TextView goods_name_tv,goods_price_tv,goods_description_tv,goods_location_tv;
+    //添加到购物车按钮
     private Button good_info_add_cart_btn;
 
+    /**
+     * 创建视图
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,10 +67,10 @@ public class GoodsInfoActivity extends Activity {
                     public void run() {
                         Log.i(TAG, "进入获取商品线程");
 
-
                         Gson gson = new Gson();
                         String responseJson = null;
 
+                        //获取当前商品信息
                         Goods goodsForAdd = new Goods();
                         goodsForAdd.setName(goods.getName());
                         String goodsJson = gson.toJson(goodsForAdd);
@@ -76,18 +82,18 @@ public class GoodsInfoActivity extends Activity {
                             responseJson = gson.fromJson(responseJson, String.class);
                             Log.i(TAG, "添加购物车商品响应解析对象:" + responseJson);
 
-                            //
                             if (responseJson != null) {
+                                //添加购物车成功
                                 if (responseJson.equals("true")){
                                     Looper.prepare();
                                     Toast.makeText(mContext, "商品已添加到购物车", Toast.LENGTH_SHORT).show();
                                     Looper.loop();
+                                //添加购物车失败,商品已经在购物车
                                 }else {
                                     Looper.prepare();
                                     Toast.makeText(mContext, "商品已经在购物车啦", Toast.LENGTH_SHORT).show();
                                     Looper.loop();
                                 }
-
                             }
 
                         } catch (IOException e) {
@@ -103,6 +109,10 @@ public class GoodsInfoActivity extends Activity {
         });
     }
 
+    /**
+     * Activity创建时调用
+     * 根据intent中携带的商品信息创建视图数据
+     */
     @Override
     protected void onStart() {
         super.onStart();

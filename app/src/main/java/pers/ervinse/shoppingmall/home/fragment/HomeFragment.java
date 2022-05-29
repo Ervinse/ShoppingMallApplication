@@ -26,7 +26,9 @@ import pers.ervinse.shoppingmall.domain.Goods;
 import pers.ervinse.shoppingmall.utils.OkhttpUtils;
 import pers.ervinse.shoppingmall.utils.PropertiesUtils;
 
-
+/**
+ * 首页碎片
+ */
 public class HomeFragment extends BaseFragment {
 
     private static final String TAG = HomeFragment.class.getSimpleName();
@@ -43,7 +45,6 @@ public class HomeFragment extends BaseFragment {
 
     /**
      * 初始化视图
-     *
      * @return
      */
     @Override
@@ -57,6 +58,9 @@ public class HomeFragment extends BaseFragment {
         return view;
     }
 
+    /**
+     * 初始化数据
+     */
     public void initData() {
         super.initData();
         Log.i(TAG, "主页数据初始化");
@@ -66,19 +70,19 @@ public class HomeFragment extends BaseFragment {
             public void run() {
                 Log.i(TAG, "进入获取商品线程");
 
-
                 Gson gson = new Gson();
                 String responseJson = null;
                 try {
-                    //发送登录请求
+                    //发送获取商品请求
                     String url = PropertiesUtils.getUrl(mContext);
                     responseJson = OkhttpUtils.doGet(url + "/goods/getHotGoods");
                     Log.i(TAG, "获取热点商品响应json:" + responseJson);
                     goodsList = gson.fromJson(responseJson, new TypeToken<List<Goods>>() {
                     }.getType());
                     Log.i(TAG, "获取热点响应解析对象:" + goodsList);
-                    //加创建商品布局
+                    //获取商品成功
                     if (goodsList != null) {
+                        //切回主线程加载布局
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -91,22 +95,22 @@ public class HomeFragment extends BaseFragment {
                                 GridLayoutManager manager = new GridLayoutManager(mContext, 2);
                                 //循环视图加载网格布局
                                 rvHome.setLayoutManager(manager);
-
                             }
                         });
                     }
-
                 } catch (IOException e) {
                     e.printStackTrace();
                     Looper.prepare();
                     Toast.makeText(mContext, "获取数据失败,服务器错误", Toast.LENGTH_SHORT).show();
                     Looper.loop();
                 }
-
             }
         }.start();
     }
 
+    /**
+     * 刷新数据
+     */
     @Override
     public void refreshData() {
         Log.i(TAG, "联网刷新数据");
@@ -118,22 +122,23 @@ public class HomeFragment extends BaseFragment {
 
                 Gson gson = new Gson();
                 String responseJson = null;
-
                 try {
-                    //发送登录请求
+                    //发送获取商品请求
                     String url = PropertiesUtils.getUrl(mContext);
                     responseJson = OkhttpUtils.doGet(url + "/goods");
                     Log.i(TAG, "获取商品响应json:" + responseJson);
                     goodsList = gson.fromJson(responseJson, new TypeToken<List<Goods>>() {
                     }.getType());
                     Log.i(TAG, "获取商品响应解析对象:" + goodsList);
-
+                    ////切回主线程调整布局
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-
+                            //防止因为初始化未加载布局
                             if (adapter != null) {
+                                //更新数据适配器中商品数据
                                 adapter.setGoodsList(goodsList);
+                                //刷新视图
                                 adapter.flushView();
                             }
                         }
@@ -151,6 +156,5 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void saveData() {
-
     }
 }

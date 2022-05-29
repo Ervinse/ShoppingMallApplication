@@ -22,10 +22,13 @@ import pers.ervinse.shoppingmall.domain.User;
 import pers.ervinse.shoppingmall.utils.OkhttpUtils;
 import pers.ervinse.shoppingmall.utils.PropertiesUtils;
 
-
+/**
+ * 登录页面
+ */
 public class LoginActivity extends Activity {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
+    //注册请求码
     private static final int REGISTER_REQUEST_CODE = 1;
 
     private Context mContext;
@@ -112,16 +115,16 @@ public class LoginActivity extends Activity {
                     if (responseJson != null){
                         //登录成功
                         if (responseJson.equals("true")){
-
-
+                            //发送请求获取当前用户名对应的简介
                             responseJson = OkhttpUtils.doGet(url + "/users/getDescription/" + userName);
                             Log.i(TAG, "获取描述请求响应json:" + responseJson);
                             userDesc = gson.fromJson(responseJson, String.class);
                             Log.i(TAG, "获取描述请求响应解析数据:" + userDesc);
-                            //回传用户名
+                            //回传用户名和简介
                             Intent intent = new Intent();
                             intent.putExtra("userName", userName);
                             intent.putExtra("userDesc", userDesc);
+                            //设置数据状态
                             setResult(RESULT_OK, intent);
                             //销毁当前方法
                             finish();
@@ -163,12 +166,11 @@ public class LoginActivity extends Activity {
                     userName = data.getStringExtra("userName");
                     userPassword = data.getStringExtra("userPassword");
                     userDesc = data.getStringExtra("userDesc");
-                    System.out.println(userName);
                     Log.i(TAG, "用户注册数据回传: " +
                             "userName = " + userName +
                             ",userPassword = " + userPassword +
                             ",userDesc = " + userDesc);
-
+                    //注册完自动登录
                     login();
                 }
                 break;
