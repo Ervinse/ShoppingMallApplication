@@ -1,13 +1,18 @@
 package pers.ervinse.shoppingmall.shoppingcart.fragment;
 
+import static pers.ervinse.shoppingmall.R.id.cart_settle_btn;
+
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import pers.ervinse.shoppingmall.BaseFragment;
@@ -38,6 +44,8 @@ public class ShoppingCartFragment extends BaseFragment {
     //全选,全删
     private CheckBox cart_check_all_checkbox,cart_delete_all_checkbox;
 
+    private Button cart_settle_btn;
+
     RecyclerView cart_item_rv;
     List<Goods> goodsList;
 
@@ -57,6 +65,39 @@ public class ShoppingCartFragment extends BaseFragment {
         cart_delete_all_checkbox = view.findViewById(R.id.cart_delete_all_checkbox);
         View viewById = view.findViewById(R.id.cart_item_price_tv);
         cart_item_rv = view.findViewById(R.id.cart_item_rv);
+
+        cart_settle_btn = view.findViewById(R.id.cart_settle_btn);
+
+        cart_settle_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveData();
+                DecimalFormat decimalFormat = new DecimalFormat("#.00");
+                String totalPrice = decimalFormat.format(adapter.getTotalPrice());
+                if (!totalPrice.equals(".00")){
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
+                            .setTitle("完成结算")
+                            .setMessage("商品总计:" + totalPrice + "元,是否完成结算?")
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Toast.makeText(mContext, "完成商品购买,总计价格为:" + totalPrice + "元", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+                    //创建删除对话框并显示
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
+            }
+        });
+
         return view;
     }
 

@@ -210,11 +210,10 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     }
 
     /**
-     * 内部方法
      * 根据当前已选的商品单价和数量获取总价
      * @return 总价
      */
-    private double getTotalPrice() {
+    public double getTotalPrice() {
         double totalPrice = 0.0;
         if (goodsList != null && goodsList.size() > 0) {
 
