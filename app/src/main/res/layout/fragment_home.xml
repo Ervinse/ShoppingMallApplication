@@ -13,42 +13,39 @@
         android:layout_width="420dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/titlebar"
+        android:background="#fec901"
+        android:orientation="horizontal"
         android:paddingLeft="35dp"
         android:paddingRight="35dp"
-        android:background="#fec901"
-        android:orientation="horizontal">
+        android:paddingBottom="15dp"
+        >
 
         <RadioButton
             android:id="@+id/category_cold_btn"
             style="@style/HomeCategoryButtonStyle"
+            android:layout_width="6px"
             android:drawableTop="@drawable/category_cold"
             android:text="首页" />
 
         <RadioButton
-            android:id="@+id/type_bottom_btn"
+            android:id="@+id/category_fruit_btn"
             style="@style/HomeCategoryButtonStyle"
-            android:drawableTop="@drawable/category_cold"
+            android:drawableTop="@drawable/category_fruit"
             android:text="分类" />
 
         <RadioButton
-            android:id="@+id/community_bottom_btn"
+            android:id="@+id/category_meat_btn"
             style="@style/HomeCategoryButtonStyle"
-            android:drawableTop="@drawable/category_cold"
+            android:drawableTop="@drawable/category_meat"
             android:paddingTop="10dp"
             android:text="发现" />
 
         <RadioButton
-            android:id="@+id/cart_bottom_btn"
+            android:id="@+id/category_wine_btn"
             style="@style/HomeCategoryButtonStyle"
-            android:drawableTop="@drawable/category_cold"
+            android:drawableTop="@drawable/category_wine"
             android:text="购物车" />
 
-        <RadioButton
-            android:id="@+id/user_bottom_btn"
-            style="@style/HomeCategoryButtonStyle"
-            android:drawableTop="@drawable/category_cold"
-
-            android:text="个人中心" />
     </RadioGroup>
 
 
