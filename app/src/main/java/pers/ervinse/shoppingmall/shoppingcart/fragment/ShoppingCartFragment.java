@@ -1,10 +1,8 @@
 package pers.ervinse.shoppingmall.shoppingcart.fragment;
 
-import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -17,7 +15,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import pers.ervinse.shoppingmall.BaseFragment;

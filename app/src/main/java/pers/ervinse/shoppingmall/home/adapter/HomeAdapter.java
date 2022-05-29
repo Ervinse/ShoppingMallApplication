@@ -83,8 +83,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         holder.item_name_tv.setText(goodsList.get(position).getName());
         holder.item_description_tv.setText(goodsList.get(position).getDescription());
-        holder.item_price_tv.setText(String.valueOf(goodsList.get(position).getPrice()));
-        //TODO 绑定商品图片
+        holder.item_price_tv.setText("￥" + goodsList.get(position).getPrice());
+        //通过图片名字获取图片资源的id
+        int id = mContext.getResources().getIdentifier(goodsList.get(position).getImage(), "drawable", mContext.getPackageName());
+        holder.item_image.setImageResource(id);
+
     }
 
     /**

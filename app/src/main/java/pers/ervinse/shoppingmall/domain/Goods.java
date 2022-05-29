@@ -8,19 +8,19 @@ import java.util.Objects;
  */
 public class Goods implements Serializable {
 
-    private String name, description,location;
+    private String name, description,location,image;
     private int number;
     private double price;
     public Boolean isSelected = false;
-    //TODO 商品图片
 
     public Goods() {
     }
 
-    public Goods(String name, String description, String location, int number, double price, Boolean isSelected) {
+    public Goods(String name, String description, String location, String image, int number, double price, Boolean isSelected) {
         this.name = name;
         this.description = description;
         this.location = location;
+        this.image = image;
         this.number = number;
         this.price = price;
         this.isSelected = isSelected;
@@ -50,6 +50,14 @@ public class Goods implements Serializable {
         this.location = location;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public int getNumber() {
         return number;
     }
@@ -75,24 +83,12 @@ public class Goods implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Goods goods = (Goods) o;
-        return number == goods.number && Double.compare(goods.price, price) == 0 && Objects.equals(name, goods.name) && Objects.equals(description, goods.description) && Objects.equals(location, goods.location) && Objects.equals(isSelected, goods.isSelected);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, description, location, number, price, isSelected);
-    }
-
-    @Override
     public String toString() {
         return "Goods{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", location='" + location + '\'' +
+                ", image='" + image + '\'' +
                 ", number=" + number +
                 ", price=" + price +
                 ", isSelected=" + isSelected +

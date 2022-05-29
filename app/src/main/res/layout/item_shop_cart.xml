@@ -60,9 +60,9 @@
 
                 <Button
                     android:id="@+id/cart_item_delete_btn"
-                    android:layout_width="70dp"
-                    android:layout_height="25dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_width="55dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/delete_cart_item_shape"
                     android:text="删除"
@@ -86,11 +86,11 @@
                     <TextView
                         android:id="@+id/cart_item_value_tv"
                         android:textColor="@android:color/background_dark"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:gravity="center"
                         android:text="1"
-                        android:textSize="20sp" />
+                        android:textSize="16sp" />
 
                     <ImageView
                         android:id="@+id/cart_item_add_btn"

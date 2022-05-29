@@ -252,9 +252,12 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     public void onBindViewHolder(@NonNull ShoppingCartAdapter.ViewHolder holder, int position) {
         Goods goods = goodsList.get(position);
         holder.cart_item_description_tv.setText(goods.getName() + "  " + goods.getDescription());
-        holder.cart_item_price_tv.setText(String.valueOf(goodsList.get(position).getPrice()));
+        holder.cart_item_price_tv.setText("￥" + String.valueOf(goodsList.get(position).getPrice()));
         holder.cart_item_check_checkbox.setChecked(goodsList.get(position).getSelected());
-        holder.cart_item_value_tv.setText(goodsList.get(position).getNumber() + "");
+        holder.cart_item_value_tv.setText("" + goodsList.get(position).getNumber());
+        //通过图片名字获取图片资源的id
+        int id = mContext.getResources().getIdentifier(goodsList.get(position).getImage(), "drawable", mContext.getPackageName());
+        holder.cart_item_image.setImageResource(id);
     }
 
     /**
