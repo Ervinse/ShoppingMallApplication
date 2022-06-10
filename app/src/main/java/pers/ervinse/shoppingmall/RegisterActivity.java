@@ -1,7 +1,7 @@
 package pers.ervinse.shoppingmall;
 
-import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,6 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 
-import pers.ervinse.shoppingmall.domain.Result;
 import pers.ervinse.shoppingmall.domain.User;
 import pers.ervinse.shoppingmall.utils.OkhttpUtils;
 import pers.ervinse.shoppingmall.utils.PropertiesUtils;
@@ -24,7 +23,7 @@ import pers.ervinse.shoppingmall.utils.PropertiesUtils;
 /**
  * 注册页面
  */
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends Activity {
 
     private static final String TAG = RegisterActivity.class.getSimpleName();
     private Context mContext;
