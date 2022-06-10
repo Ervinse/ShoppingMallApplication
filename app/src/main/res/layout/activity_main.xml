@@ -12,7 +12,6 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-
     <RadioGroup
         android:id="@+id/bottom_btn_group"
         android:layout_width="match_parent"
@@ -49,7 +48,6 @@
             android:id="@+id/user_bottom_btn"
             style="@style/MainButtonStyle"
             android:drawableTop="@drawable/user_button_selector"
-
             android:text="个人中心" />
     </RadioGroup>
 

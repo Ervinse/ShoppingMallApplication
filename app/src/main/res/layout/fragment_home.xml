@@ -15,48 +15,47 @@
         android:layout_below="@id/titlebar"
         android:background="#fec901"
         android:orientation="horizontal"
-        android:paddingLeft="35dp"
-        android:paddingRight="35dp"
-        android:paddingBottom="15dp"
-        >
+        android:paddingHorizontal="10dp">
 
         <RadioButton
             android:id="@+id/category_cold_btn"
             style="@style/HomeCategoryButtonStyle"
-            android:layout_width="6px"
-            android:drawableTop="@drawable/category_cold"
-            android:text="首页" />
+            android:layout_height="80dp"
+            android:layout_margin="10px"
+            android:drawableTop="@drawable/category_meat"
+            android:text="肉蛋" />
 
         <RadioButton
             android:id="@+id/category_fruit_btn"
             style="@style/HomeCategoryButtonStyle"
+            android:layout_height="80dp"
+            android:layout_margin="10px"
             android:drawableTop="@drawable/category_fruit"
-            android:text="分类" />
+            android:text="水果" />
 
         <RadioButton
             android:id="@+id/category_meat_btn"
             style="@style/HomeCategoryButtonStyle"
-            android:drawableTop="@drawable/category_meat"
-            android:paddingTop="10dp"
-            android:text="发现" />
+            android:layout_height="80dp"
+            android:layout_margin="10px"
+            android:drawableTop="@drawable/category_cold"
+            android:text="速食" />
 
         <RadioButton
             android:id="@+id/category_wine_btn"
             style="@style/HomeCategoryButtonStyle"
+            android:layout_height="80dp"
+            android:layout_margin="10px"
             android:drawableTop="@drawable/category_wine"
-            android:text="购物车" />
-
+            android:text="饮料" />
     </RadioGroup>
-
-
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/category_btn_group"
-        />
+        android:layout_below="@id/category_btn_group" />
 
 
 </RelativeLayout>

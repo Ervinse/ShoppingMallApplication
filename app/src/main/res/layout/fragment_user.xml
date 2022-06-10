@@ -6,45 +6,44 @@
     android:orientation="vertical">
 
 
-<!--    &lt;!&ndash;用户标题栏&ndash;&gt;-->
-<!--    <RelativeLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="10dp"-->
-<!--        android:background="#fff">-->
+    <!--    &lt;!&ndash;用户标题栏&ndash;&gt;-->
+    <!--    <RelativeLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="10dp"-->
+    <!--        android:background="#fff">-->
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_centerInParent="true"-->
-<!--            android:layout_marginLeft="30dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:text="我的"-->
-<!--            android:textColor="#303235"-->
-<!--            android:textSize="20sp" />-->
-<!--    </RelativeLayout>-->
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_centerInParent="true"-->
+    <!--            android:layout_marginLeft="30dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:text="我的"-->
+    <!--            android:textColor="#303235"-->
+    <!--            android:textSize="20sp" />-->
+    <!--    </RelativeLayout>-->
 
-<!--    &lt;!&ndash;分割线&ndash;&gt;-->
-<!--    <View-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="5dp"-->
-<!--        android:background="#eeee"-->
-<!--        />-->
+    <!--    &lt;!&ndash;分割线&ndash;&gt;-->
+    <!--    <View-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="5dp"-->
+    <!--        android:background="#eeee"-->
+    <!--        />-->
 
     <LinearLayout
         android:id="@+id/user_bar"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@drawable/user_background"
-
-        >
+        android:background="#ffcc00">
+        <!--        android:background="@drawable/user_background">-->
 
         <ImageView
             android:id="@+id/user_photo_image"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginTop="35dp"
             android:layout_marginLeft="35dp"
+            android:layout_marginTop="35dp"
             android:src="@drawable/item_example" />
 
         <LinearLayout
@@ -58,20 +57,111 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="45dp"
-                android:textStyle="bold"
+                android:text="请登录"
                 android:textSize="20sp"
-                android:text="请登录"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/user_desc_tv"
-                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="15dp"
-                android:text="简介: tough and hard"/>
+                android:text="简介: tough and hard"
+                android:textColor="@color/white"
+                android:visibility="invisible" />
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingLeft="20dp"
+            android:text="通知设置"
+            android:textColor="#333"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingLeft="30dp"
+            android:text="系统内通知"
+            android:textColor="#555"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingLeft="30dp"
+            android:text="系统外通知"
+            android:textColor="#555"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingLeft="20dp"
+            android:text="系统设置"
+            android:textColor="#333"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingLeft="30dp"
+            android:text="主题颜色"
+            android:textColor="#555"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingLeft="30dp"
+            android:text="存储空间"
+            android:textColor="#555"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingLeft="20dp"
+            android:text="用户信息"
+            android:textColor="#333"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingLeft="30dp"
+            android:text="用户信息"
+            android:textColor="#555"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingLeft="30dp"
+            android:text="注销账号"
+            android:textColor="#555"
+            android:textSize="16dp" />
     </LinearLayout>
 
     <Button
