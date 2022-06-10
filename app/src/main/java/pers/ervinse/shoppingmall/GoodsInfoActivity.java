@@ -22,14 +22,17 @@ import pers.ervinse.shoppingmall.domain.Goods;
 import pers.ervinse.shoppingmall.utils.OkhttpUtils;
 import pers.ervinse.shoppingmall.utils.PropertiesUtils;
 
+/**
+ * 商品详情页面
+ */
 public class GoodsInfoActivity extends Activity {
 
     private static final String TAG = GoodsInfoActivity.class.getSimpleName();
     private Goods goods;
     private Context mContext;
 
-    //返回按钮
-    private ImageView good_info_back_btn;
+    //返回按钮,商品图片
+    private ImageView good_info_back_btn,goods_image;
     private TextView goods_name_tv,goods_price_tv,goods_description_tv,goods_location_tv;
     //添加到购物车按钮
     private Button good_info_add_cart_btn;
@@ -50,6 +53,7 @@ public class GoodsInfoActivity extends Activity {
         goods_description_tv = findViewById(R.id.goods_description_tv);
         goods_location_tv = findViewById(R.id.goods_location_tv);
         good_info_add_cart_btn = findViewById(R.id.good_info_add_cart_btn);
+        goods_image = findViewById(R.id.goods_image);
 
 
         good_info_back_btn.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +129,9 @@ public class GoodsInfoActivity extends Activity {
         goods_price_tv.setText(String.valueOf(goods.getPrice()));
         goods_description_tv.setText(goods.getDescription());
         goods_location_tv.setText(goods.getLocation());
+
+        int id = mContext.getResources().getIdentifier(goods.getImage(), "drawable", mContext.getPackageName());
+        goods_image.setImageResource(id);
 
     }
 }

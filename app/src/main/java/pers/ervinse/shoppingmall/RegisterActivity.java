@@ -21,6 +21,9 @@ import pers.ervinse.shoppingmall.domain.User;
 import pers.ervinse.shoppingmall.utils.OkhttpUtils;
 import pers.ervinse.shoppingmall.utils.PropertiesUtils;
 
+/**
+ * 注册页面
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = RegisterActivity.class.getSimpleName();
