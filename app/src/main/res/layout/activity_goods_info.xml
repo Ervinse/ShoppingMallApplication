@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/goods_name_tv"
@@ -72,28 +72,30 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="120dp">
+            android:layout_marginLeft="30dp">
 
             <TextView
                 android:id="@+id/dollar_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 android:text="价格: ￥"
-                android:textSize="22dp"
-                android:textStyle="bold"/>
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="#AE5259"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/goods_price_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@id/dollar_tv"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginLeft="10dp"
                 android:text="100"
-                android:textSize="22dp"
-                android:textStyle="bold"/>
+                android:textSize="18dp"
+                android:textColor="#AE5259"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/dollar_tv"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -104,25 +106,23 @@
         android:id="@+id/goods_description_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_marginLeft="25dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="25dp"
         android:maxLines="5"
-        android:text="这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述"
-        />
+        android:text="这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述,这是商品的描述" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_marginLeft="25dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="25dp">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/location"
-            />
+            android:src="@drawable/location" />
 
         <TextView
             android:id="@+id/goods_location_tv"
@@ -131,14 +131,14 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="8dp"
             android:maxLines="2"
-            android:text="这里是地址,这里是地址,这里是地址,这里是地址,这里是地址,这里是地址"/>
+            android:text="这里是地址,这里是地址,这里是地址,这里是地址,这里是地址,这里是地址" />
     </LinearLayout>
 
     <!--空白填充页面-->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <!--底部按钮组-->
     <LinearLayout
@@ -153,8 +153,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawablePadding="5dp"
             android:drawableTop="@drawable/icon_callserver_unpressed"
+            android:drawablePadding="5dp"
             android:gravity="center"
             android:padding="2dp"
             android:text="联系客服"
@@ -165,8 +165,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawablePadding="5dp"
             android:drawableTop="@drawable/good_uncollected"
+            android:drawablePadding="5dp"
             android:gravity="center"
             android:padding="2dp"
             android:text="收藏"
@@ -178,8 +178,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawablePadding="5dp"
             android:drawableTop="@drawable/icon_good_detail_cart"
+            android:drawablePadding="5dp"
             android:gravity="center"
             android:padding="2dp"
             android:text="购物车"
@@ -195,7 +195,6 @@
             android:text="加入购物车"
             android:textColor="#fff" />
     </LinearLayout>
-
 
 
 </LinearLayout>
