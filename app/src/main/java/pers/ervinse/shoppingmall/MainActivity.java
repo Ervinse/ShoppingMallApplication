@@ -86,7 +86,6 @@ public class MainActivity extends FragmentActivity {
 
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                //TODO 各个分类跳转未实现
                 //TODO 存在bug:分类RadioGroup无法重复按下同一个选项
                 bottom_btn_group.check(R.id.type_bottom_btn);
             }

@@ -272,7 +272,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private CheckBox cart_item_check_checkbox;
-        // TODO 商品图片数据未加载
+        //商品图片
         private ImageView cart_item_image;
         //商品描述,单价,数量
         private TextView cart_item_description_tv, cart_item_price_tv,cart_item_value_tv;

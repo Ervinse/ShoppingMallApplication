@@ -29,7 +29,7 @@ public class CommunityFragment extends BaseFragment {
         super.initData();
         Log.i(TAG, "社区数据被初始化");
 
-        //TODO 模拟数据
+
         //加载图片id数据
         ArrayList<Integer> list = new ArrayList<>();
         list.add(R.drawable.carousel_1);
@@ -37,7 +37,7 @@ public class CommunityFragment extends BaseFragment {
         list.add(R.drawable.carousel_3);
         list.add(R.drawable.carousel_4);
 
-        //TODO 模拟数据
+
         //加载标题数据
         ArrayList<String> titleList = new ArrayList<>();
         titleList.add("猕猴桃");

@@ -80,7 +80,7 @@ public class UserFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Log.i(TAG, "用户登录事件");
-                if (isLogin == false) {
+                if (!isLogin) {
 
                     Log.i(TAG, "用户未登录");
                     //前往登录页面
